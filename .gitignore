@@ -1,0 +1,15 @@
+.DS_Store
+
+node_modules/karma/
+
+node_modules/karma-chai/
+
+node_modules/karma-chrome-launcher/
+
+node_modules/karma-mocha/
+
+node_modules/karma-phantomjs-launcher/
+
+node_modules/mocha/
+
+
