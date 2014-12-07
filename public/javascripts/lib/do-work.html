@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="app" >
+	<head>
+		<title>Lift Log</title>
+		<link rel="stylesheet" href="/stylesheets/style.css">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="/javascripts/lib/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular-animate.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular_touch.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular-route.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/moment.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angularMoment.js"></script>
+		<script type="text/javascript" src="/javascripts/app.js"></script>
+		<script type="text/javascript" src="/javascripts/utils/formatDatesAngular.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/save_sets.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular_d3.js"></script>
+		<script type="text/javascript" src="/javascripts/reporting/reporting_directive.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/clicknumberkey.directive.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/backspacekeyclick.directive.js"></script>
+		<script type="text/javascript" src="/javascripts/exercisemenu/selectcategory.directive.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/keyboardoverlay.directive.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/savesetschangeinputfocus.directive.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/addsettodb.service.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/deleteset.service.js"></script>
+		<script type="text/javascript" src="/javascripts/savesets/scrollandreset.service.js"></script>
+		<script type="text/javascript" src="/javascripts/pastsets/getpastsetsdata.service.js"></script>
+		<script type="text/javascript" src="/javascripts/mainnav/menutoggle.directive.js"></script>
+		<script type="text/javascript" src="/javascripts//mainnav/closemenuonselection.directive.js"></script>
+		<script type="text/javascript" src="/javascripts/reporting/getreportdata.service.js"></script>
+		<script type="text/javascript" src="/javascripts/reporting/addexercisetoreport.service.js"></script>
+		<script type="text/javascript" src="/javascripts/reporting/removeexercisefromreport.service.js"></script>
+		<script type="text/javascript" src="/javascripts/exercisemenu/open_ex_menu.js"></script>
+		<script type="text/javascript" src="/javascripts/exercisemenu/close_ex_menu.js"></script>
+		<script type="text/javascript" src="/javascripts/pastsets/filter_toggle_anim.js"></script>
+		<script type="text/javascript" src="/javascripts/pastsets/filterByReps.filter.js"></script>
+		<script type="text/javascript" src="/javascripts/pastsets/filterByExercise.filter.js"></script>
+		<script type="text/javascript" src="/javascripts/pastsets/pastSets.js"></script>
+		<script type="text/javascript" src="/javascripts/reporting/reporting_angular.js"></script>
+	</head>
+	<body >
+		<div class="menu-open-wrapper cf"></div>
+		<div class="menu-open cf" menutoggle></div>
+		<nav class="main-nav cf">
+			<ul>
+				<li class="nav-item"><a href="do-work#/home" closemenu>Home</a></li>
+				<li class="nav-item"><a href="do-work#/save-sets" closemenu>Save Sets</a></li>
+				<li class="nav-item"><a href="do-work#/past-sets" class="past-sets" closemenu>View Past Sets</a></li>
+				<!--<li class="nav-item"><a href="do-work#/reporting" class="go-to-reporting" closemenu>Reporting</a></li>-->
+				<li class="nav-item"><a href="logout" class="log-out" closemenu>Logout</a></li>
+			</ul>
+		</nav>
+		<div class="main-content cf clearfix">
+			<div ng-view class = "cf clearfix"></div>
+		</div><!--close main content-->
+
+	</body>
+</html>

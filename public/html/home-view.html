@@ -1,0 +1,23 @@
+<div ng-controller = "homeViewController as homeCtrl">
+	
+	Hello from the home view.
+	<button ng-click = "homeCtrl.setCategory('Family')">
+		Family
+	</button>
+	<button ng-click = "homeCtrl.setCategory('Work')">
+		Work
+	</button>
+
+
+	<ul>
+		<ul ng-repeat = "contact in filteredContacts = (homeCtrl.contacts | categoryFilter:homeCtrl.category)">
+			<li>
+				{{contact.name}}
+			</li>
+			<li>
+				{{contact.category}}
+			</li>
+		</ul>
+	</ul>
+
+</div>
