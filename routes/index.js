@@ -3,11 +3,13 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var getHomeView = require('./getHomeView');
 var getHomeViewData = require('./getHomeViewData');
+var addContacts = require('./addContacts');
 /* GET home page. */
 
 
 router.get('/', getHomeView.get);
 router.get('/getContactData', getHomeViewData.get);
+router.post('/addContact', addContacts.add);  
   /*var name,
   db = mongoose.connection;
   

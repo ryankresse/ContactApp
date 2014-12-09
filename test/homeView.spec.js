@@ -14,7 +14,7 @@ describe('make sure mocha is working', function() {
 describe('it should query the database and populate the array with some data', function() {
 	
 	 it('the array length should = 2', function(done) { 
-	  
+	  var testContactArray;
 	  getData.get(done);
 	  
 	  expect(testContactArray).to.have.length(2);

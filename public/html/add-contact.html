@@ -1,0 +1,18 @@
+<div ng-controller = "addContactController as add">
+	
+	Hello from add a contact view.
+	
+	<form>
+		<input type = "text" ng-model = "add.contactName" placeholder = "Contact Name">
+		<input type="radio" name = "categoryRadio" ng-model="add.category" value="Family"> Family 
+  		<input type="radio" name = "categoryRadio" ng-model="add.category" value="Friends"> Friends
+  		<input type="radio" name = "categoryRadio" ng-model="add.category" value="Work"> Work 
+  		<input type="radio" name = "categoryRadio" ng-model="add.category" value="Other"> Other 
+	
+  		<button type = "submit" ng-click = "add.addContact(add.contactName, add.category)">
+			Add contact.
+		</button>
+
+	</form>
+
+</div>

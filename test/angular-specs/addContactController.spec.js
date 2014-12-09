@@ -1,42 +1,41 @@
-describe('Testing homeViewController', function() {
+describe('Testing add contact controller', function() {
     
 	var scope;
   	var ctrl;
   	var $httpBackend;
+    var ContactsDataService;
     beforeEach(module('ngTouch'));
     beforeEach(module('app'));
-   
-	 beforeEach(inject(function($rootScope, $controller) {
+	   
+	 beforeEach(inject(function($rootScope, $controller, _$q_, _ContactsDataService_) {
     	scope = $rootScope.$new();
-    	ctrl = $controller('homeViewController', {$scope: scope});
+    	ctrl = $controller('addContactController', {$scope: scope});
+    	ContactsDataService = _ContactsDataService_;
+    	$q = _$q_;
   	 }));
 
-	describe('setContacts()', function() {
-	   it('contacts should be empty before we call the function', function() { 
-	   		expect(ctrl.contacts).to.have.length(0); 
-	   	});
-	 });
+	/*describe('addContacts()', function() {
+	   it('should send a success message and empty out the form fields when the account is succesfully created ', function(done) { 
+	   		var c = 0;
+	   		/*var successStub = sinon.stub(ContactsDataService, "addContact", function (name, category) {
+	   			var deferred = $q.defer();
+	   			if (true) {
+	   				deferred.resolve('success');
+	   			}
+	   			c = 1;
+	   			return deferred.promise;
+	   			
+	   		});
+	   		ctrl.addContact(done);
+	   		expect(ctrl.contactName).to.have.length(0);
+	   		expect(ctrl.category).to.equal('Family');
+	   		expect(ctrl.success).to.equal(true); 
+	   		ContactsDataService.addContact.restore();
+	   	});*/
+	 
 
-	describe('setContacts()', function() {
-	   it('contacts should be filled with the data we pass to setContacts()', function() { 
-	   		ctrl.setContacts(["Ryan", "John"]);
-	   		expect(ctrl.contacts).to.have.length(2); 
-	   	});
-	 });
-
-
-	describe('checking the default category', function() {
-	   it('the default category should be Family', function() { 
-	   		expect(ctrl.category).to.equal('Family'); 
-	   	});
-	});
-
-	describe('setCategory()', function() {
-	   it('the calling the setCategory function should change the category to the category passed in to the function', function() { 
-	   		ctrl.setCategory('Friends');
-	   		expect(ctrl.category).to.equal('Friends'); 
-	   	});
-	});
+	
+	
 
 	
 

@@ -7,12 +7,12 @@ angular.module('app', ['ngRoute', 'ngTouch', 'ngTouch','ngAnimate'])
       when('/', {
         templateUrl: 'html/home-view.html',
         controller: 'homeViewController'
-      })
-      /*.
-      when('/save-sets', {
-        templateUrl: 'save-sets.html',
-        controller: 'saveSetsCtrl'
       }).
+      when('/add-contact', {
+        templateUrl: 'html/add-contact.html',
+        controller: 'addContactController'
+      })
+      /*..
       when('/past-sets', {
         templateUrl: 'past-sets.html',
         controller: 'pastSetsCtrl'
