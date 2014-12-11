@@ -17,6 +17,15 @@ describe('Testing add contact controller', function() {
 	describe('UT: addContacts()', function() {
 	  it('should push a contact to the contacts array when it is called and receiveds data in return', function(done) { 
 	    ctrl.contacts = [];
+	    
+	    var loadStub = sinon.stub(ContactsDataService, "loadData");
+	    var loaddefer = $q.defer();
+	    loadStub.returns(loaddefer.promise);
+	    loaddefer.resolve({data: {
+	   	  	  name: "Contact Name",
+	   	  	  category: "Contact Category"
+	   	  	}});
+
 	    var successStub = sinon.stub(ContactsDataService, "addContact", function (name, category) {
 	   	  
 	   	  var deferred = $q.defer();
@@ -27,16 +36,16 @@ describe('Testing add contact controller', function() {
 	   	  	  category: "Contact Category"
 	   	  	}
 	   	  };
-	   	  if (true) {
+	   	 
 	   	  	deferred.resolve(data);
-	   	  }
+	   	  
 	   	  return deferred.promise;
 
 	   	});
 
 	   expect(ctrl.contacts).to.have.length(0);
 	   ctrl.newContact.addContact('johnn', 'family');
-	   done();
+	   scope.$apply();
 	   expect(ctrl.contacts).to.have.length(1);
 	   //expect(ctrl.category).to.equal('Family');
 	   //expect(ctrl.success).to.equal(true); 

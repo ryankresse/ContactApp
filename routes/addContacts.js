@@ -20,7 +20,7 @@ exports.add = function (req, res) {
       }
       else {
         console.log(newUser);
-        res.send(newUser);
+        res.send('add successful');
        // Contact.disconnect();
       }
     

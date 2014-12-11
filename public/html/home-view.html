@@ -10,7 +10,7 @@
 
 
 	<ul>
-		<ul ng-repeat = "contact in filteredContacts = (contactCtrl.contacts | categoryFilter:contactCtrl.category)">
+		<ul ng-repeat = "contact in filteredContacts = (contactCtrl.contacts | categoryFilter:contactCtrl.category | orderBy:contactCtrl.orderItem)">
 			<li>
 				{{contact.name}}
 			</li>

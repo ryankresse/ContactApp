@@ -4,12 +4,14 @@ var mongoose = require('mongoose');
 var getHomeView = require('./getHomeView');
 var getHomeViewData = require('./getHomeViewData');
 var addContacts = require('./addContacts');
+var editContact = require('./editContact');
 /* GET home page. */
 
 
 router.get('/', getHomeView.get);
 router.get('/getContactData', getHomeViewData.get);
 router.post('/addContact', addContacts.add);  
+router.post('/editContact', editContact.save);
   /*var name,
   db = mongoose.connection;
   
