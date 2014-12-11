@@ -16,7 +16,7 @@ exports.get = function (req, res) {
       
       }
       else {
-        console.log(results);
+        console.log(' results' , results);
         res.send(results);
         //contacts.disconnect();
       }

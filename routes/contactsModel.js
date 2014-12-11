@@ -6,8 +6,7 @@ var mongoose = require('mongoose');
       category: String
     });
 
-var connection = mongoose.createConnection('mongodb://localhost/mydb');
+var contactModel = mongoose.model('ContactModel', contactSchema);
 
-
-module.exports = connection.model('contacts', contactSchema);
+module.exports = contactModel;
 

@@ -1,0 +1,17 @@
+
+	
+	Hello from the view contact view.
+	
+	<form>
+		<input type = "text" ng-model = "contactCtrl.viewContact.contactName" placeholder = "Contact Name">
+		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contactCategory" value="Family"> Family 
+  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contactCategory" value="Friends"> Friends
+  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contactCategory" value="Work"> Work 
+  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contactCategory" value="Other"> Other 
+	
+  		<button type = "submit" ng-click = "contactCtrl.viewContact.saveEdits(contactCtrl.viewContact.contactName, contactCtrl.viewContact.contactCategory)">
+			Save edits
+		</button>
+
+	</form>
+

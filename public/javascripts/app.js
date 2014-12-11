@@ -6,11 +6,15 @@ angular.module('app', ['ngRoute', 'ngTouch', 'ngTouch','ngAnimate'])
     $routeProvider.
       when('/', {
         templateUrl: 'html/home-view.html',
-        controller: 'homeViewController'
+        controller: 'contactBookController'
       }).
       when('/add-contact', {
         templateUrl: 'html/add-contact.html',
-        controller: 'addContactController'
+        controller: 'contactBookController'
+      }).
+       when('/view-contact', {
+        templateUrl: 'html/view-contact.html',
+        controller: 'contactBookController'
       })
       /*..
       when('/past-sets', {

@@ -1,49 +1,110 @@
 (function (){
+'use strict';
 angular
 	.module('app')
-	.controller('homeViewController', ['$http', 'ContactsDataService', '$scope',  homeViewController]);
+	.controller('contactBookController', ['ContactsDataService', '$scope', contactBookController]);
 	
 
-	function homeViewController ($http, ContactsDataService) {
-		console.log('home view controller');
-		this.letters = ['a', 'b', 'c', 'd'];
-		this.contacts = ContactsDataService.contacts;
-
-
+	function contactBookController (ContactsDataService, $scope) {
+		console.log('contact book controller');
+		
+		this.contacts = [];
 		this.category = "Family";
-		
+		this.loadError = false;
 		var that = this;
-		var data;
-
 		
-		if (ContactsDataService.dataLoaded < 2) {
-			ContactsDataService.loadData().then(function (results) {
-				if (results === "success") {
-					console.log('a success')
-					console.log(that.contacts);
-					that.contacts = ContactsDataService.contacts;
-				}
-				else {
-					console.log('error');
-				}
-			});
-		}
-
-		
-
-		
-		this.setContacts = function (data) {
+		ContactsDataService.loadData().then(function (data) {
+			var data = data.data;
 			console.log(data);
-			that.contacts = data;
-			console.log(that.contacts);
-		};
-
+			if (!data.length) {
+				that.loadError = true;
+				return 'no data';
+			}
+			else {
+		  		that.contacts = data;
+			}
+		});
+		
 	
-
 		this.setCategory = function (category) {
 			that.category = category;
 		};
 
+
+
+
+		////////// NEW CONTACT FUNCTIONALITY /////////////
+
+
+		this.newContact = {};
+		this.newContact.contactName = '';
+		this.newContact.contactCategory = "Family";
+		this.newContact.addSuccessful = false;
+		this.newContact.addError = false;
+		
+		
+
+		this.newContact.addContact = function (name, category) {
+			console.log('trying to add contact');
+			console.log(name);
+			console.log(category);
+			ContactsDataService.addContact(name, category).then(function (data) {
+				var data = data.data;
+				console.log(data);
+				console.log('hello');
+				if (!data) {
+					console.log('no data');
+					that.newContact.addError = true;
+					return 'add contact failure';
+				}
+				else {
+		  			that.contacts.push(data);
+		  			console.log(that.contacts);
+		  		}
+			});
+		};
+
+
+
+
+
+		////////// EDIT CONTACT FUNCTIONALITY /////////////
+
+
+		this.viewContact = {};
+		this.viewContact.contactName = '';
+		this.viewContact.contactCategory = "Family";
+		this.viewContact.editSuccessful = false;
+		this.viewContact.editUnsuccessful = false;
+		
+		this.viewContact.setInfo = function (contact) {
+		  console.log(contact);
+		  that.viewContact.contactName = contact.name;
+		  that.viewContact.contactCategory = contact.category;
+		  
+		};
+
+
+		this.viewContact.saveEdits = function () {
+			console.log('trying to save edits');
+			/*ContactsDataService.addContact(name, category).then(function (data) {
+				var data = data.data;
+				console.log(data);
+				console.log('hello');
+				if (!data) {
+					console.log('no data');
+					that.newContact.addError = true;
+					return 'add contact failure';
+				}
+				else {
+		  			that.contacts.push(data);
+		  			console.log(that.contacts);
+		  		}
+			});*/
+		};
+
+
+	
 
 	}
 

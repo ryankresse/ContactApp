@@ -8,31 +8,41 @@ describe('Testing add contact controller', function() {
     beforeEach(module('app'));
 	   
 	 beforeEach(inject(function($rootScope, $controller, _$q_, _ContactsDataService_) {
-    	scope = $rootScope.$new();
-    	ctrl = $controller('addContactController', {$scope: scope});
-    	ContactsDataService = _ContactsDataService_;
-    	$q = _$q_;
+       scope = $rootScope.$new();
+       ctrl = $controller('contactBookController', {$scope: scope});
+       ContactsDataService = _ContactsDataService_;
+       $q = _$q_;
   	 }));
 
-	/*describe('addContacts()', function() {
-	   it('should send a success message and empty out the form fields when the account is succesfully created ', function(done) { 
-	   		var c = 0;
-	   		/*var successStub = sinon.stub(ContactsDataService, "addContact", function (name, category) {
-	   			var deferred = $q.defer();
-	   			if (true) {
-	   				deferred.resolve('success');
-	   			}
-	   			c = 1;
-	   			return deferred.promise;
-	   			
-	   		});
-	   		ctrl.addContact(done);
-	   		expect(ctrl.contactName).to.have.length(0);
-	   		expect(ctrl.category).to.equal('Family');
-	   		expect(ctrl.success).to.equal(true); 
-	   		ContactsDataService.addContact.restore();
-	   	});*/
-	 
+	describe('UT: addContacts()', function() {
+	  it('should push a contact to the contacts array when it is called and receiveds data in return', function(done) { 
+	    ctrl.contacts = [];
+	    var successStub = sinon.stub(ContactsDataService, "addContact", function (name, category) {
+	   	  
+	   	  var deferred = $q.defer();
+
+	   	  var data = {
+	   	    data: {
+	   	  	  name: "Contact Name",
+	   	  	  category: "Contact Category"
+	   	  	}
+	   	  };
+	   	  if (true) {
+	   	  	deferred.resolve(data);
+	   	  }
+	   	  return deferred.promise;
+
+	   	});
+
+	   expect(ctrl.contacts).to.have.length(0);
+	   ctrl.newContact.addContact('johnn', 'family');
+	   done();
+	   expect(ctrl.contacts).to.have.length(1);
+	   //expect(ctrl.category).to.equal('Family');
+	   //expect(ctrl.success).to.equal(true); 
+	   ContactsDataService.addContact.restore();
+	 });
+    });
 
 	
 	

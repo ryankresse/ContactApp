@@ -19,7 +19,8 @@ exports.add = function (req, res) {
         //Contact.disconnect();
       }
       else {
-        res.send('success');
+        console.log(newUser);
+        res.send(newUser);
        // Contact.disconnect();
       }
     
