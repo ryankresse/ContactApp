@@ -28,6 +28,13 @@ angular
 		  return $http.post("/editContact", {contact: contact});
 		};
 
+
+		this.deleteContact = function (id) {
+		  console.log('deleting contact');
+		  console.log(id);
+		  return $http.post("/deleteContact", {id: id});
+		};
+
 	}		
 
 })(); 

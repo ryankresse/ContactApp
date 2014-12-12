@@ -5,6 +5,8 @@ var getHomeView = require('./getHomeView');
 var getHomeViewData = require('./getHomeViewData');
 var addContacts = require('./addContacts');
 var editContact = require('./editContact');
+var deleteContact = require('./deleteContact');
+
 /* GET home page. */
 
 
@@ -12,6 +14,7 @@ router.get('/', getHomeView.get);
 router.get('/getContactData', getHomeViewData.get);
 router.post('/addContact', addContacts.add);  
 router.post('/editContact', editContact.save);
+router.post('/deleteContact', deleteContact.del);
   /*var name,
   db = mongoose.connection;
   

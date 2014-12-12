@@ -15,12 +15,13 @@ exports.add = function (req, res) {
 
     newUser.save(function (err, newUser) {
       if (err) {
-        res.send(err);
+        console.log(err);
+        res.send('could not add contact');
         //Contact.disconnect();
       }
       else {
         console.log(newUser);
-        res.send('add successful');
+        res.send(newUser);
        // Contact.disconnect();
       }
     

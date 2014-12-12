@@ -55,18 +55,18 @@ angular
 			ContactsDataService.addContact(name, category).then(function (data) {
 			  var data = data.data;
 			  console.log(data);
-			  console.log('hello');
-			  if (data.data === 'add successful') {
-			    //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
-			    that.contacts.push(data);
-		  	    console.log(that.contacts);
-			  }
-			  
-			  else {
-			    //handling errors from the server.
+			  if (data === 'could not add contact') {
+			   //handling errors from the server.
 			    console.log('no data');
 			    that.newContact.addError = true;
 			    return 'add contact failure';
+			    
+			  }
+			  
+			  else {
+			    //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
+			  	that.contacts.push(data);
+		  	    console.log(that.contacts);
 		  	  }
 			});
 		};
@@ -82,6 +82,7 @@ angular
 		this.viewContact.contact = {};
 		this.viewContact.editSuccessful = false;
 		this.viewContact.editUnsuccessful = false;
+		this.viewContact.deleteUnsuccessful = false;
 		this.viewContact.inputNameError = false;
 
 		// when the user clicks a contact from the home view, we need to populate the viewContact view with that contact's information.
@@ -121,14 +122,39 @@ angular
 			else {
 				// handling errors from the server.
 		  	  console.log('no data');
-			  that.newContact.editUnsuccessful = true;
+			  that.viewContact.editUnsuccessful = true;
 			}
 			
 		  });
 		};
 
 
-	
+		
+		this.viewContact.deleteContact = function () {
+		  var i = that.contacts.length - 1;
+		  console.log('deleting contact');
+		  ContactsDataService.deleteContact(that.viewContact.contact._id).then(function (data) {
+		     console.log(data);
+		  //if the contact has been deleted successfully in the db, we delete it from the contacts array, which will update the view.
+		    if (data.data === "delete successful") {
+		    for ( ; i > -1 ; i--) {
+		    	if (that.viewContact.contact._id === that.contacts[i]._id) {
+		    	  var deletedContact = that.contacts.splice(i);
+		    	  break;
+		    	}
+		    }
+		  }
+		  else {
+		  	// handling errors from the server.
+		    console.log('no delete unsuccesful');
+		    that.viewContact.deleteUnsuccessful = true;
+		  }
+			
+		  });
+
+
+		};
+
 
 	}
 
