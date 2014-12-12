@@ -2,10 +2,12 @@
 'use strict';
 angular
 	.module('app')
-	.controller('contactBookController', ['ContactsDataService', '$scope', contactBookController]);
+	.controller('contactBookController', ['ContactsDataService', '$scope', '$location', contactBookController]);
 	
+	// a flag we'll use to know if our data has already been loaded from the server.
+	var loaded = false;
 
-	function contactBookController (ContactsDataService, $scope) {
+	function contactBookController (ContactsDataService, $scope, $location) {
 		console.log('contact book controller');
 		
 		this.contacts = [];
@@ -15,18 +17,7 @@ angular
 		var that = this;
 		
 		
-		// loading our contacts on page load.
-		ContactsDataService.loadData().then(function (data) {
-			var data = data.data;
-			console.log(data);
-			if (!data.length) {
-				that.loadError = true;
-				return 'no data';
-			}
-			else {
-		  		that.contacts = data;
-			}
-		});
+
 		
 	
 		// changing the category of contacts displayed when the user clicks on one of the categories.	
@@ -79,7 +70,7 @@ angular
 
 
 		this.viewContact = {};
-		this.viewContact.contact = {};
+		this.viewContact.contact = '';
 		this.viewContact.editSuccessful = false;
 		this.viewContact.editUnsuccessful = false;
 		this.viewContact.deleteUnsuccessful = false;
@@ -91,6 +82,9 @@ angular
 		  // this clones the contact object. if we simply set it with '=', they'll refer to the same object, and our home view data will be automatically updates when the user update the viewContact view data--we only want that updated after the updates are saved to the database.
 		  that.viewContact.contact = JSON.parse(JSON.stringify(contact));
 		};
+
+
+
 
 		// saving the user's edits in the database
 		this.viewContact.saveEdits = function () {
@@ -156,6 +150,43 @@ angular
 		};
 
 
+	
+
+		////////// LOADING DATA ON PAGE LOAD /////////////
+		
+
+		this.init = function () {
+		  ContactsDataService.loadData().then(function (data) {
+		    
+		    // 
+		    var data = data.data;
+		    console.log(data);
+		    if (!data.length) {
+		    	that.loadError = true;
+		    	return 'no data';
+		    }
+		    else {
+		      // populating our contacts array with the contacts retrieved from the DB.
+		      that.contacts = data;
+		    	var path = $location.path();
+		      // checking to see if the user has landed on the /view-contact view. If so, we redirect them to the home view--otherwise they wouldn't have selected a contact to view, and the /view-contact view would be empty 
+		  	  if (path === '/view-contact' && that.viewContact.contact === '') {
+		  	    $location.path('/');
+		  	    console.log('changing location');
+		  	  }
+		      // setting our loaded flag to true so that we don't try to load all the data again.	  
+		      loaded = true;
+		    }
+		  
+		  });
+  
+	    };
+        
+        // we initialize the app by loading data from the server if it hasn't been loaded already.
+        if (loaded === false) {
+	      this.init();
+        }
+	
 	}
 
 
