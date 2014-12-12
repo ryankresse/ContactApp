@@ -139,7 +139,7 @@ angular
 		    if (data.data === "delete successful") {
 		    for ( ; i > -1 ; i--) {
 		    	if (that.viewContact.contact._id === that.contacts[i]._id) {
-		    	  var deletedContact = that.contacts.splice(i);
+		    	  var deletedContact = that.contacts.splice(i, 1);
 		    	  break;
 		    	}
 		    }
