@@ -5,13 +5,8 @@ var Contact = require('./contactsModel');
 
 exports.add = function (req, res) {
  console.log('trying to add contact');
- console.log(req.body.name);
- console.log(req.body.category);
 
-
-   
-
-    var newUser = new Contact({ name: req.body.name, category: req.body.category});
+    var newUser = new Contact({ name: req.body.contact.name, category: req.body.contact.category, phone: req.body.contact.phone, email: req.body.contact.email, address: req.body.contact.address});
 
     newUser.save(function (err, newUser) {
       if (err) {

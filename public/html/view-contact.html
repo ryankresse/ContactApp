@@ -4,6 +4,10 @@
 	
 	<form>
 		<input type = "text" ng-model = "contactCtrl.viewContact.contact.name" placeholder = "Contact Name">
+		<input type = "text" ng-model = "contactCtrl.viewContact.contact.email" placeholder = "No email provided">
+		<input type = "text" ng-model = "contactCtrl.viewContact.contact.address" placeholder = "No address provided">
+		<input type = "text" ng-model = "contactCtrl.viewContact.contact.phone" placeholder = "No phone number provided">
+
 		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Family"> Family 
   		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Friends"> Friends
   		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Work"> Work 
@@ -15,7 +19,9 @@
 		<button type = "submit" ng-click = "contactCtrl.viewContact.deleteContact()">
 			Delete Contact
 		</button>
-
+		<div ng-show = "contactCtrl.viewContact.editSuccessful">
+			Contact succesfully edited.
+		</div>
 
 	</form>
 

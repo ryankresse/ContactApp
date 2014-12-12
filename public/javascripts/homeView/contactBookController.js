@@ -32,38 +32,50 @@ angular
 
 
 		this.newContact = {};
-		this.newContact.contactName = '';
-		this.newContact.contactCategory = "Family";
+		this.newContact.info = {
+		  name: '',
+		  email: '',
+		  address: '',
+		  phone: '',
+		  category: 'Family'
+		};
 		this.newContact.addSuccessful = false;
 		this.newContact.addError = false;
 		
 		//trying to save our new contact to the db.
 		
 
-		this.newContact.addContact = function (name, category) {
-			console.log('trying to add contact');
-			console.log(name);
-			console.log(category);
-			ContactsDataService.addContact(name, category).then(function (data) {
-			  var data = data.data;
-			  console.log(data);
-			  if (data === 'could not add contact') {
-			   //handling errors from the server.
-			    console.log('no data');
-			    that.newContact.addError = true;
-			    return 'add contact failure';
-			    
-			  }
-			  
-			  else {
-			    //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
-			  	that.contacts.push(data);
-		  	    console.log(that.contacts);
-		  	    $location.path('/');
-		  	    that.newContact.addSuccessful = true;
-		  	    $timeout(hideAddSuccessfulMessage, 2000);
-		  	  }
-			});
+		this.newContact.addContact = function (contact) {
+		  console.log('trying to add contact');
+		  console.log(contact);
+		  ContactsDataService.addContact(contact).then(function (data) {
+		    var data = data.data;
+		    console.log(data);
+		    if (data === 'could not add contact') {
+		     //handling errors from the server.
+		      console.log('no data');
+		      that.newContact.addError = true;
+		      return 'add contact failure';
+		      
+		    }
+		    
+		    else {
+		      //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
+		    	that.contacts.push(data);
+		        console.log(that.contacts);
+		        $location.path('/');
+		        that.newContact.addSuccessful = true;
+		        $timeout(hideAddSuccessfulMessage, 2000);
+		        
+		        that.newContact.info = {
+				  name: '',
+				  email: '',
+				  address: '',
+				  phone: '',
+				  category: 'Family'
+				};
+		      }
+		  });
 		};
 
 		function hideAddSuccessfulMessage () {
@@ -86,10 +98,11 @@ angular
 		this.viewContact.inputNameError = false;
 
 		// when the user clicks a contact from the home view, we need to populate the viewContact view with that contact's information.
-		this.viewContact.setInfo = function (contact) {
+		this.viewContact.init = function (contact) {
 		  console.log(contact);
 		  // this clones the contact object. if we simply set it with '=', they'll refer to the same object, and our home view data will be automatically updates when the user update the viewContact view data--we only want that updated after the updates are saved to the database.
 		  that.viewContact.contact = JSON.parse(JSON.stringify(contact));
+		  $location.path('/view-contact');
 		};
 
 
@@ -121,6 +134,8 @@ angular
 			  	  break;
 			  	}
 			  }
+			that.viewContact.editSuccessful = true;
+		    $timeout(hideEditSuccessfulMessage, 2000);
 			}
 			else {
 				// handling errors from the server.
@@ -132,6 +147,14 @@ angular
 		};
 
 
+		function hideEditSuccessfulMessage (message) {
+		  this.viewContact.editSuccessful = false;;
+		}
+		
+
+		function hideEditSuccessfulMessage () {
+		  that.viewContact.editSuccessful = false;
+		}
 		
 		this.viewContact.deleteContact = function () {
 		  var i = that.contacts.length - 1;

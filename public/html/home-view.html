@@ -7,25 +7,12 @@
 	<button ng-click = "contactCtrl.setCategory('Work')">
 		Work
 	</button>
-
-
-	<ul>
-		<ul ng-repeat = "contact in filteredContacts = (contactCtrl.contacts | categoryFilter:contactCtrl.category | orderBy:contactCtrl.orderItem)">
-			<li>
+		<ul>
+			<li  ng-repeat = "contact in filteredContacts = (contactCtrl.contacts | categoryFilter:contactCtrl.category | orderBy:contactCtrl.orderItem)" ng-click = "contactCtrl.viewContact.init(contact)">
 				{{contact.name}}
 			</li>
-			<li>
-				{{contact.category}}
-			</li>
-			<li>
-				<a href = "#/view-contact">
-					<button ng-click = "contactCtrl.viewContact.setInfo(contact)">
-						View Contact
-					</button>
-				</a>
-			</li>
 		</ul>
-	</ul>
+	
 
 	<a href = "#/add-contact">Add contact</a>
 

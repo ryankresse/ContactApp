@@ -16,10 +16,10 @@ angular
 		  return $http.get("/getContactData");
 		};
 	
-		this.addContact = function (name, category) {
+		this.addContact = function (contact) {
 		  console.log('adding contact');
-		  console.log(name);
-		  return $http.post("/addContact", {name: name, category: category});
+		  console.log(contact);
+		  return $http.post("/addContact", {contact: contact});
 		};
 
 		this.editContact = function (contact) {
