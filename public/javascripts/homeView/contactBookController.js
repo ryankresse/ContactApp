@@ -2,12 +2,12 @@
 'use strict';
 angular
 	.module('app')
-	.controller('contactBookController', ['ContactsDataService', '$scope', '$location', contactBookController]);
+	.controller('contactBookController', ['ContactsDataService', '$scope', '$location', '$timeout', contactBookController]);
 	
 	// a flag we'll use to know if our data has already been loaded from the server.
 	var loaded = false;
 
-	function contactBookController (ContactsDataService, $scope, $location) {
+	function contactBookController (ContactsDataService, $scope, $location, $timeout) {
 		console.log('contact book controller');
 		
 		this.contacts = [];
@@ -37,8 +37,9 @@ angular
 		this.newContact.addSuccessful = false;
 		this.newContact.addError = false;
 		
-		
 		//trying to save our new contact to the db.
+		
+
 		this.newContact.addContact = function (name, category) {
 			console.log('trying to add contact');
 			console.log(name);
@@ -58,9 +59,16 @@ angular
 			    //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
 			  	that.contacts.push(data);
 		  	    console.log(that.contacts);
+		  	    $location.path('/');
+		  	    that.newContact.addSuccessful = true;
+		  	    $timeout(hideAddSuccessfulMessage, 2000);
 		  	  }
 			});
 		};
+
+		function hideAddSuccessfulMessage () {
+		  that.newContact.addSuccessful = false;
+		}
 
 
 
@@ -73,6 +81,7 @@ angular
 		this.viewContact.contact = '';
 		this.viewContact.editSuccessful = false;
 		this.viewContact.editUnsuccessful = false;
+		this.viewContact.deleteSuccessful = false;
 		this.viewContact.deleteUnsuccessful = false;
 		this.viewContact.inputNameError = false;
 
@@ -137,17 +146,21 @@ angular
 		    	  break;
 		    	}
 		    }
+		    $location.path('/');
+		    that.viewContact.deleteSuccessful = true;
+		    $timeout(hideDeleteSuccessfulMessage, 2000);
 		  }
 		  else {
 		  	// handling errors from the server.
 		    console.log('no delete unsuccesful');
-		    that.viewContact.deleteUnsuccessful = true;
 		  }
 			
 		  });
-
-
 		};
+
+		function hideDeleteSuccessfulMessage () {
+		  that.viewContact.deleteSuccessful = false;
+		}
 
 
 	
@@ -176,6 +189,7 @@ angular
 		  	  }
 		      // setting our loaded flag to true so that we don't try to load all the data again.	  
 		      loaded = true;
+
 		    }
 		  
 		  });
