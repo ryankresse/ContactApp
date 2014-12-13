@@ -18,6 +18,10 @@ angular
 		
 		
 
+		function hideSuccessMessage (obj, msg) {
+		  that[obj][msg] = false;
+		}
+
 		
 	
 		// changing the category of contacts displayed when the user clicks on one of the categories.	
@@ -65,7 +69,7 @@ angular
 		        console.log(that.contacts);
 		        $location.path('/');
 		        that.newContact.addSuccessful = true;
-		        $timeout(hideAddSuccessfulMessage, 2000);
+		        $timeout(function ()  {hideSuccessMessage('newContact', 'addSuccessful')}, 2000);
 		        
 		        that.newContact.info = {
 				  name: '',
@@ -77,10 +81,6 @@ angular
 		      }
 		  });
 		};
-
-		function hideAddSuccessfulMessage () {
-		  that.newContact.addSuccessful = false;
-		}
 
 
 
@@ -135,7 +135,7 @@ angular
 			  	}
 			  }
 			that.viewContact.editSuccessful = true;
-		    $timeout(hideEditSuccessfulMessage, 2000);
+		    $timeout(function ()  {hideSuccessMessage('viewContact', 'editSuccessful')}, 2000);
 			}
 			else {
 				// handling errors from the server.
@@ -146,15 +146,9 @@ angular
 		  });
 		};
 
-
-		function hideEditSuccessfulMessage (message) {
-		  this.viewContact.editSuccessful = false;;
-		}
 		
 
-		function hideEditSuccessfulMessage () {
-		  that.viewContact.editSuccessful = false;
-		}
+		
 		
 		this.viewContact.deleteContact = function () {
 		  var i = that.contacts.length - 1;
@@ -171,7 +165,8 @@ angular
 		    }
 		    $location.path('/');
 		    that.viewContact.deleteSuccessful = true;
-		    $timeout(hideDeleteSuccessfulMessage, 2000);
+		    $timeout(function ()  {hideSuccessMessage('viewContact', 'deleteSuccessful')}, 2000);
+
 		  }
 		  else {
 		  	// handling errors from the server.
@@ -180,13 +175,6 @@ angular
 			
 		  });
 		};
-
-		function hideDeleteSuccessfulMessage () {
-		  that.viewContact.deleteSuccessful = false;
-		}
-
-
-	
 
 		////////// LOADING DATA ON PAGE LOAD /////////////
 		
