@@ -1,15 +1,23 @@
 var mongoose = require('mongoose');
  
 
+
+
  var contactSchema = mongoose.Schema({
-      name: String,
-      category: String,
-      email: String,
-      phone: String,
-      address: String
-    });
+ 	name: String,
+	category: String,
+	email: String,
+	phone: String,
+	address: String
+});
 
-var contactModel = mongoose.model('ContactModel', contactSchema);
 
-module.exports = contactModel;
+ var userContactsSchema = mongoose.Schema({
+    username: String,
+    contacts: [contactSchema]
+});
+
+var userContactsModel = mongoose.model('userContactsModel', userContactsSchema);
+
+module.exports = userContactsModel;
 

@@ -5,10 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');      
-var routes = require('./routes/index');
 var users = require('./routes/users');
-
 var app = express();
+var passport = require('passport');
+var expressSession = require('express-session');
+var flash = require('connect-flash');
+var routes = require('./routes/index')(passport);
+var initPassport = require('./passport/init');
+// connection to db
+mongoose.connect('mongodb://localhost/mydb');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,12 +28,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// Configuring Passport
+
+// TODO - Why Do we need this key ?
+//app.use(express.cookieParser('your secret here'));
+
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use(flash());
+
+initPassport(passport)
+
 app.use('/', routes);
 app.use('/users', users);
 
-// connection to db
-
-mongoose.connect('mongodb://localhost/mydb');
 
 
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="loginCreateAccount">
+	<head>
+		<title>Contact App</title>
+		<link rel="stylesheet" href="/stylesheets/style.css">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="/javascripts/lib/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular-animate.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular_touch.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/angular-route.js"></script>
+		<script type="text/javascript" src="/javascripts/login-create-account/loginCreateAccount.js"></script>
+		<script type="text/javascript" src="/javascripts/login-create-account/checkCreds.service.js"></script>
+		<script type="text/javascript" src="/javascripts/login-create-account/loginController.js"></script>
+		<script type="text/javascript" src="/javascripts/login-create-account/signUp.service.js"></script>
+		<script type="text/javascript" src="/javascripts/login-create-account/signUpController.js"></script>
+		
+
+	</head>
+	<body >
+		<div ng-controller = "loginController as loginCtrl" class = "cf clearfix">
+			<form id="" class = "login-form" ng-submit = "loginCtrl.attemptLogin()" novalidate>
+				<label for="email" class="pull-left">Email:</label>
+				<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "loginCtrl.creds.username" required>
+				<label for="password" class="pull-left">Password:</label>
+				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "loginCtrl.creds.password" required>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button">Login</button>
+			</form>
+		</div>
+
+		<div ng-controller = "signUpController as signupCtrl" class = "cf clearfix">
+			<form id="" class = "login-form" ng-submit = "signupCtrl.signUp()" novalidate>
+				<label for="email" class="pull-left">Email:</label>
+				<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "signupCtrl.newUser.username" required>
+				<label for="password" class="pull-left">Password:</label>
+				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "signupCtrl.newUser.password" required>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button">Sign up</button>
+			</form>
+		</div>
+
+	</body>
+</html>

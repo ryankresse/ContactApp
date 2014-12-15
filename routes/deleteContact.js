@@ -1,16 +1,33 @@
 var mongoose = require('mongoose');
 
-var contactToDelete = require('./contactsModel'); 
+var UserContacts = require('./contactsModel');
 
 
 exports.del = function (req, res) {
   console.log('trying to delete contact');
   console.log(req.body);
 
-  contactToDelete.findById(req.body.id).remove(function (err, deletedContact) {
-    if (err) res.send(err);
-    console.log(deletedContact);
-    res.send('delete successful');
+   UserContacts.findOne({ 'username' :  req.session.username}, function(err, userDoc) {
+  	if (err) {
+  		console.log(err);
+  		res.send('error editing contact');
+  	}
+  	else {
+      var contact = userDoc.contacts.id(req.body.id).remove();
+
+  		userDoc.save(function(err, contacts) {
+       if (err) {
+        res.send('error deleting contact');
+       }
+       else {
+         console.log(contacts);
+         res.send('delete successful');
+       }
+     });
+  
+
+  }
+
   }); 
   
 

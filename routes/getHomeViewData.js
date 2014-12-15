@@ -1,23 +1,21 @@
 var mongoose = require('mongoose');
-var contacts = require('./contactsModel'); 
-
+var UserContacts = require('./contactsModel'); 
  
 
 
 exports.get = function (req, res) {
   console.log('in get function');
   
-
-    contacts.find(function (err, results) {
+  UserContacts.findOne({ 'username' :  req.session.username }, function(err, userDoc) {
       if (err) {
         console.log(err);
-        res.send(err);
+        res.send('error loading contacts');
         //contacts.disconnect();
       
       }
       else {
-        console.log(' results' , results);
-        res.send(results);
+        console.log('userDoc' , userDoc);
+        res.send(userDoc.contacts);
         //contacts.disconnect();
       }
     });

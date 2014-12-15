@@ -163,8 +163,10 @@ angular
 		    	  break;
 		    	}
 		    }
+
 		    $location.path('/');
 		    that.viewContact.deleteSuccessful = true;
+		    // need to reset the view contact object.
 		    $timeout(function ()  {hideSuccessMessage('viewContact', 'deleteSuccessful')}, 2000);
 
 		  }
@@ -186,8 +188,10 @@ angular
 		    var data = data.data;
 		    console.log(data);
 		    if (!data.length) {
-		    	that.loadError = true;
-		    	return 'no data';
+		    	// empty data message here
+		    }
+		    if (data === "error loading contacts") {
+		    	// error handling here
 		    }
 		    else {
 		      // populating our contacts array with the contacts retrieved from the DB.

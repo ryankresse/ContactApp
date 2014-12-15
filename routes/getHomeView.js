@@ -9,14 +9,11 @@ exports.get = function (req, res) {
       res.status(err.status).end();
     }
     else {
-      console.log("Sent");
+      console.log("Sent to");
     }
   });
 }
 
-exports.test = function (req, res) {
-  return 4; 
-}
 
 
 
