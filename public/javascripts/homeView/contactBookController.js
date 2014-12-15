@@ -67,9 +67,9 @@ angular
 		    
 		    else {
 		      //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
-		    	var dataSingleQuotes = JSON.parse(data);
-		    	console.log(dataSingleQuotes);
-		    	that.newContact.info._id = dataSingleQuotes;
+		    	var dataParsed = JSON.parse(data);
+		    	console.log(dataParsed);
+		    	that.newContact.info._id = dataParsed;
 		    	that.contacts.push(that.newContact.info);
 		        console.log(that.contacts);
 		        $location.path('/');
