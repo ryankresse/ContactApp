@@ -13,6 +13,8 @@ exports.del = function (req, res) {
   		res.send('error editing contact');
   	}
   	else {
+  		console.log(userDoc);
+  		console.log(req.body.id);
       var contact = userDoc.contacts.id(req.body.id).remove();
 
   		userDoc.save(function(err, contacts) {

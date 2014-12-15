@@ -41,7 +41,8 @@ angular
 		  email: '',
 		  address: '',
 		  phone: '',
-		  category: 'Family'
+		  category: 'Family',
+		  _id: undefined
 		};
 		this.newContact.addSuccessful = false;
 		this.newContact.addError = false;
@@ -52,8 +53,9 @@ angular
 		this.newContact.addContact = function (contact) {
 		  console.log('trying to add contact');
 		  console.log(contact);
-		  ContactsDataService.addContact(contact).then(function (data) {
-		    var data = data.data;
+		  ContactsDataService.addContact(contact).then(function (response) {
+		    console.log(response);
+		    var data = response.data;
 		    console.log(data);
 		    if (data === 'could not add contact') {
 		     //handling errors from the server.
@@ -65,7 +67,10 @@ angular
 		    
 		    else {
 		      //if the new contact has been succesfully saved to the db, we push it to the contacts array, which will add the new contact to the view.
-		    	that.contacts.push(data);
+		    	var dataSingleQuotes = JSON.parse(data);
+		    	console.log(dataSingleQuotes);
+		    	that.newContact.info._id = dataSingleQuotes;
+		    	that.contacts.push(that.newContact.info);
 		        console.log(that.contacts);
 		        $location.path('/');
 		        that.newContact.addSuccessful = true;

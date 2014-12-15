@@ -13,8 +13,18 @@ exports.save = function (req, res) {
   		res.send('error editing contact');
   	}
   	else {
-      userDoc.contacts.set(0, req.body.contact);
+      var i = 0,
+          len = userDoc.contacts.length;
 
+      for ( ; i < len; i++) {
+        if (userDoc.contacts[i]._id == req.body.contact._id) {
+          console.log(userDoc.contacts[i]._id);
+          console.log(req.body.contact._id);
+          console.log('match');
+          userDoc.contacts.set(i, req.body.contact);
+          break;
+        }
+      }
   		userDoc.save(function(err, contacts) {
        if (err) {
         res.send('error editing contact');

@@ -15,9 +15,11 @@ exports.add = function (req, res) {
         res.send('Error loading user doc');
     }
    else {
-     console.log(userDoc);
+     
       userDoc.contacts.push({name: req.body.contact.name, category: req.body.contact.category, phone: req.body.contact.phone, email: req.body.contact.email, address: req.body.contact.address});
      console.log(userDoc);
+     var newContact = userDoc.contacts[userDoc.contacts.length - 1];
+     console.log(newContact);
     userDoc.save(function (err, userDoc) {
           if (err) {
            console.log(err);
@@ -25,7 +27,9 @@ exports.add = function (req, res) {
           }
           else {
             console.log(userDoc);
-            res.send('contact saved');
+            console.log(newContact);
+            console.log(newContact._id);
+            res.send(newContact._id);
           }
     });
      }
