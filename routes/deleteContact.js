@@ -10,7 +10,7 @@ exports.del = function (req, res) {
    UserContacts.findOne({ 'username' :  req.session.username}, function(err, userDoc) {
   	if (err) {
   		console.log(err);
-  		res.send('error editing contact');
+  		res.send('error deleting contact');
   	}
   	else {
   		console.log(userDoc);

@@ -12,7 +12,7 @@ exports.add = function (req, res) {
     // In case of any error, return using the done method
     if (err){
         console.log('Error in loading user doc: '+err);
-        res.send('Error loading user doc');
+        res.send('error loading user doc');
     }
    else {
      

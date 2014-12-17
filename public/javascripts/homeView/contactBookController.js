@@ -14,11 +14,10 @@ angular
 		this.category = "Family";
 		this.loadError = false;
 		this.orderItem = 'name';
+		this.loadError = false;
 		var that = this;
 		
-		
-
-		function hideSuccessMessage (obj, msg) {
+		this.hideSuccessMessage = function (obj, msg) {
 		  that[obj][msg] = false;
 		}
 
@@ -46,18 +45,23 @@ angular
 		};
 		this.newContact.addSuccessful = false;
 		this.newContact.addError = false;
-		
 		//trying to save our new contact to the db.
 		
 
 		this.newContact.addContact = function (contact) {
 		  console.log('trying to add contact');
+		  
 		  console.log(contact);
 		  ContactsDataService.addContact(contact).then(function (response) {
-		    console.log(response);
+		    that.newContact.handleAddResponse(response);
+		  });
+		};
+
+		this.newContact.handleAddResponse = function (response) {
+			console.log(response);
 		    var data = response.data;
 		    console.log(data);
-		    if (data === 'could not add contact') {
+		    if (data === 'error saving contact' || data === 'error loading user doc') {
 		     //handling errors from the server.
 		      console.log('no data');
 		      that.newContact.addError = true;
@@ -74,7 +78,7 @@ angular
 		        console.log(that.contacts);
 		        $location.path('/');
 		        that.newContact.addSuccessful = true;
-		        $timeout(function ()  {hideSuccessMessage('newContact', 'addSuccessful')}, 2000);
+		        $timeout(function ()  {that.hideSuccessMessage('newContact', 'addSuccessful')}, 2000);
 		        
 		        that.newContact.info = {
 				  name: '',
@@ -84,9 +88,8 @@ angular
 				  category: 'Family'
 				};
 		      }
-		  });
-		};
 
+		};
 
 
 
@@ -99,8 +102,7 @@ angular
 		this.viewContact.editSuccessful = false;
 		this.viewContact.editUnsuccessful = false;
 		this.viewContact.deleteSuccessful = false;
-		this.viewContact.deleteUnsuccessful = false;
-		this.viewContact.inputNameError = false;
+		this.viewContact.deleteError = false;
 
 		// when the user clicks a contact from the home view, we need to populate the viewContact view with that contact's information.
 		this.viewContact.init = function (contact) {
@@ -115,23 +117,19 @@ angular
 
 		// saving the user's edits in the database
 		this.viewContact.saveEdits = function () {
-		  var i = 0;
-		  var len = that.contacts.length;
-		  console.log('trying to save edits');
-		  console.log(that.viewContact.contact);		
-		  
-		  // we don't allow contacts without names
-		  if (that.viewContact.contact.name.length === 0) {
-		    console.log('input name error');
-		    that.viewContact.inputNameError = true;
-		    return;
-		  }
+		 console.log('trying to save edits');
+		 console.log(that.viewContact.contact);		
+		 ContactsDataService.editContact(that.viewContact.contact).then(function (response) {
+			that.viewContact.handleEditResponse(response);
+		  });
+		};
 
 
-		  ContactsDataService.editContact(that.viewContact.contact).then(function (data) {
-		    console.log(data);
+		this.viewContact.handleEditResponse = function (response) {
+			 var i = 0,
+			 	 len = that.contacts.length;
 			// if the updates have been saved successfully, we update that contact's information in our contacts array, which will update the view.
-			if (data.data === "edit successful") {
+			if (response.data === "edit successful") {
 			  console.log('edit successful');
 			  for ( ; i < len; i++) {
 			  	if (that.viewContact.contact._id === that.contacts[i]._id) {
@@ -140,15 +138,14 @@ angular
 			  	}
 			  }
 			that.viewContact.editSuccessful = true;
-		    $timeout(function ()  {hideSuccessMessage('viewContact', 'editSuccessful')}, 2000);
+		    $timeout(function ()  {that.hideSuccessMessage('viewContact', 'editSuccessful')}, 2000);
 			}
 			else {
 				// handling errors from the server.
 		  	  console.log('no data');
 			  that.viewContact.editUnsuccessful = true;
 			}
-			
-		  });
+
 		};
 
 		
@@ -156,47 +153,50 @@ angular
 		
 		
 		this.viewContact.deleteContact = function () {
-		  var i = that.contacts.length - 1;
+		  
 		  console.log('deleting contact');
-		  ContactsDataService.deleteContact(that.viewContact.contact._id).then(function (data) {
-		     console.log(data);
-		  //if the contact has been deleted successfully in the db, we delete it from the contacts array, which will update the view.
-		    if (data.data === "delete successful") {
-		    for ( ; i > -1 ; i--) {
-		    	if (that.viewContact.contact._id === that.contacts[i]._id) {
-		    	  var deletedContact = that.contacts.splice(i, 1);
-		    	  break;
-		    	}
-		    }
-
-		    $location.path('/');
-		    that.viewContact.deleteSuccessful = true;
-		    // need to reset the view contact object.
-		    $timeout(function ()  {hideSuccessMessage('viewContact', 'deleteSuccessful')}, 2000);
-
-		  }
-		  else {
-		  	// handling errors from the server.
-		    console.log('no delete unsuccesful');
-		  }
-			
+		  ContactsDataService.deleteContact(that.viewContact.contact._id).then(function (response) {
+		   	that.viewContact.handleDeleteResponse(response);
 		  });
 		};
+
+		this.viewContact.handleDeleteResponse = function (response) {
+			var i = that.contacts.length - 1;
+		  //if the contact has been deleted successfully in the db, we delete it from the contacts array, which will update the view.
+		    if (response.data === "delete successful") {
+			    for ( ; i > -1 ; i--) {
+			    	if (that.viewContact.contact._id === that.contacts[i]._id) {
+			    	  var deletedContact = that.contacts.splice(i, 1);
+			    	  break;
+			    	}
+			    }
+
+		    	$location.path('/');
+		    	that.viewContact.deleteSuccessful = true;
+		    	// need to reset the view contact object.
+		    	$timeout(function ()  {that.hideSuccessMessage('viewContact', 'deleteSuccessful')}, 2000);
+		    }
+		  	else {
+		  	 that.viewContact.deleteError = true;
+		  	}
+		};
+
 
 		////////// LOADING DATA ON PAGE LOAD /////////////
 		
 
 		this.init = function () {
-		  ContactsDataService.loadData().then(function (data) {
-		    
-		    // 
-		    var data = data.data;
+		  ContactsDataService.loadData().then(function (response) {
+			that.handleLoadResponse(response);
+		 });
+		};
+
+	    this.handleLoadResponse = function (response) {
+		    var data = response.data;
 		    console.log(data);
-		    if (!data.length) {
-		    	// empty data message here
-		    }
+
 		    if (data === "error loading contacts") {
-		    	// error handling here
+		    	that.loadError = true;
 		    }
 		    else {
 		      // populating our contacts array with the contacts retrieved from the DB.
@@ -211,10 +211,9 @@ angular
 		      loaded = true;
 
 		    }
-		  
-		  });
-  
-	    };
+		};
+
+
         
         // we initialize the app by loading data from the server if it hasn't been loaded already.
         if (loaded === false) {

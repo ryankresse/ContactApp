@@ -13,7 +13,9 @@
 			</li>
 		</ul>
 	
-
+		<div ng-show = "!filteredContacts.length">
+			No contacts! Add some!
+		</div>
 	<a href = "#/add-contact">Add contact</a>
 
 	<div ng-show = "contactCtrl.newContact.addSuccessful">

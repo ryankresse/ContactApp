@@ -15,7 +15,7 @@ exports.registerUser = function (req, res) {
     // already exists
     if (user) {
         console.log('User already exists with username: '+req.body.newUser.username);
-        res.send("User already exists")
+        res.send("duplicate user")
      } 
      else {
       createUser();

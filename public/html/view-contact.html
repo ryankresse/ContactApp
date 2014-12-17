@@ -13,7 +13,7 @@
   		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Work"> Work 
   		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Other"> Other 
 	
-  		<button type = "submit" ng-click = "contactCtrl.viewContact.saveEdits()">
+  		<button type = "submit" ng-click = "contactCtrl.viewContact.saveEdits()" enabledisable name = "contactCtrl.viewContact.contact.name">
 			Save edits
 		</button>
 		<button type = "submit" ng-click = "contactCtrl.viewContact.deleteContact()">

@@ -12,7 +12,7 @@
   		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Work"> Work 
   		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Other"> Other 
 	
-  		<button type = "submit" ng-click = "contactCtrl.newContact.addContact(contactCtrl.newContact.info)">
+  		<button type = "submit" ng-click = "contactCtrl.newContact.addContact(contactCtrl.newContact.info)" enabledisable name = "contactCtrl.newContact.info.name">
 			Add contact.
 		</button>
 

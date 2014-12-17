@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="/javascripts/login-create-account/loginCreateAccount.js"></script>
 		<script type="text/javascript" src="/javascripts/login-create-account/checkCreds.service.js"></script>
 		<script type="text/javascript" src="/javascripts/login-create-account/loginController.js"></script>
+		<script type="text/javascript" src="/javascripts/login-create-account/loginSignupButtonDisable.Directive.js"></script>
 		<script type="text/javascript" src="/javascripts/login-create-account/signUp.service.js"></script>
 		<script type="text/javascript" src="/javascripts/login-create-account/signUpController.js"></script>
 		
@@ -20,22 +21,22 @@
 	</head>
 	<body >
 		<div ng-controller = "loginController as loginCtrl" class = "cf clearfix">
-			<form id="" class = "login-form" ng-submit = "loginCtrl.attemptLogin()" novalidate>
+			<form id="" name = "loginform" class = "login-form" ng-submit = "loginCtrl.attemptLogin(loginform.$valid)" novalidate>
 				<label for="email" class="pull-left">Email:</label>
 				<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "loginCtrl.creds.username" required>
 				<label for="password" class="pull-left">Password:</label>
 				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "loginCtrl.creds.password" required>
-				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button">Login</button>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" username = "loginCtrl.creds.username" password = "loginCtrl.creds.password" >Login</button>
 			</form>
 		</div>
 
 		<div ng-controller = "signUpController as signupCtrl" class = "cf clearfix">
-			<form id="" class = "login-form" ng-submit = "signupCtrl.signUp()" novalidate>
+			<form id="" name = "signupform" class = "login-form" ng-submit = "signupCtrl.signUp(signupform.$valid)" novalidate>
 				<label for="email" class="pull-left">Email:</label>
 				<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "signupCtrl.newUser.username" required>
 				<label for="password" class="pull-left">Password:</label>
 				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "signupCtrl.newUser.password" required>
-				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button">Sign up</button>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" valid = "signupform.$valid" username = "signupCtrl.newUser.username" password = "signupCtrl.newUser.password">Sign up</button>
 			</form>
 		</div>
 

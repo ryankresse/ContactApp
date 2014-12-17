@@ -1,60 +1,43 @@
-describe('Testing add contact controller', function() {
+describe('Testing add contact', function() {
     
 	var scope;
   	var ctrl;
   	var $httpBackend;
-    var ContactsDataService;
     beforeEach(module('ngTouch'));
     beforeEach(module('app'));
-	   
-	 beforeEach(inject(function($rootScope, $controller, _$q_, _ContactsDataService_) {
-       scope = $rootScope.$new();
-       ctrl = $controller('contactBookController', {$scope: scope});
-       ContactsDataService = _ContactsDataService_;
-       $q = _$q_;
+   
+	 beforeEach(inject(function($rootScope, $controller) {
+    	scope = $rootScope.$new();
+    	ctrl = $controller('contactBookController', {$scope: scope});
+    	ctrl.contacts = [];
   	 }));
 
-	describe('UT: addContacts()', function() {
-	  it('should push a contact to the contacts array when it is called and receiveds data in return', function(done) { 
-	    ctrl.contacts = [];
-	    
-	    var loadStub = sinon.stub(ContactsDataService, "loadData");
-	    var loaddefer = $q.defer();
-	    loadStub.returns(loaddefer.promise);
-	    loaddefer.resolve({data: {
-	   	  	  name: "Contact Name",
-	   	  	  category: "Contact Category"
-	   	  	}});
-
-	    var successStub = sinon.stub(ContactsDataService, "addContact", function (name, category) {
-	   	  
-	   	  var deferred = $q.defer();
-
-	   	  var data = {
-	   	    data: {
-	   	  	  name: "Contact Name",
-	   	  	  category: "Contact Category"
-	   	  	}
-	   	  };
-	   	 
-	   	  	deferred.resolve(data);
-	   	  
-	   	  return deferred.promise;
-
+	describe('UT: handleResponse()', function() {
+	   it('contacts should be empty before we call the function', function() { 
+	   		expect(ctrl.contacts).to.have.length(0); 
 	   	});
-
-	   expect(ctrl.contacts).to.have.length(0);
-	   ctrl.newContact.addContact('johnn', 'family');
-	   scope.$apply();
-	   expect(ctrl.contacts).to.have.length(1);
-	   //expect(ctrl.category).to.equal('Family');
-	   //expect(ctrl.success).to.equal(true); 
-	   ContactsDataService.addContact.restore();
 	 });
-    });
 
-	
-	
+	/*describe('setContacts()', function() {
+	   it('contacts should be filled with the data we pass to setContacts()', function() { 
+	   		ctrl.setContacts(["Ryan", "John"]);
+	   		expect(ctrl.contacts).to.have.length(2); 
+	   	});
+	 });
+
+
+	describe('checking the default category', function() {
+	   it('the default category should be Family', function() { 
+	   		expect(ctrl.category).to.equal('Family'); 
+	   	});
+	});
+
+	describe('setCategory()', function() {
+	   it('the calling the setCategory function should change the category to the category passed in to the function', function() { 
+	   		ctrl.setCategory('Friends');
+	   		expect(ctrl.category).to.equal('Friends'); 
+	   	});
+	});
 
 	
 
