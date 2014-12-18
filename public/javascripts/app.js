@@ -16,7 +16,39 @@ angular.module('app', ['ngRoute', 'ngTouch', 'ngTouch','ngAnimate'])
         templateUrl: 'html/view-contact.html',
         controller: 'contactBookController'
       })
-      /*..
+    }]);
+
+       angular.module('app')
+       .run(function($rootScope, $window, $location) {  
+        $rootScope.slide = '';  
+        $rootScope.loaded = 0;
+
+        $rootScope.$on('$routeChangeStart', function() {  
+            //event button to move backward  
+             var path = $location.path();
+             if ($rootScope.loaded > 0) {
+
+             if (path === "/") {
+            $rootScope.slide = 'fromLeft'; 
+          }
+          else {
+            $rootScope.slide = 'fromRight'; 
+          }
+        }
+        $rootScope.loaded += 1;
+         console.log($rootScope.loaded);
+            /*$rootScope.back = function() {  
+                $rootScope.slide = 'slide-right';  
+                $window.history.back();  
+            }  
+            //event button item list to move forward  
+            $rootScope.next = function() {  
+                $rootScope.slide = 'slide-left';  
+            }  */
+        }); 
+         
+    });  
+      /*..;
       when('/past-sets', {
         templateUrl: 'past-sets.html',
         controller: 'pastSetsCtrl'
@@ -28,7 +60,7 @@ angular.module('app', ['ngRoute', 'ngTouch', 'ngTouch','ngAnimate'])
       /*otherwise({
         redirectTo: '/phones'
       });*/
-  }]);
+
 
 
 })(); 

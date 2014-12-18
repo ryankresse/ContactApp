@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="/stylesheets/style.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/stylesheets/style.css">
 		<script type="text/javascript" src="/javascripts/lib/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="/javascripts/lib/angular.js"></script>
 		<script type="text/javascript" src="/javascripts/lib/angular-animate.js"></script>
@@ -12,6 +13,7 @@
 		<script type="text/javascript" src="/javascripts/lib/angular-route.js"></script>
 		<script type="text/javascript" src="/javascripts/app.js"></script>
 		<script type="text/javascript" src="/javascripts/homeView/contactsData.service.js"></script>
+		<script type="text/javascript" src="/javascripts/homeView/viewContactRedirect.service.js"></script>
 		<script type="text/javascript" src="/javascripts/homeView/validateInput.service.js"></script>
 		<script type="text/javascript" src="/javascripts/homeView/addEditButtonDisable.Directive.js"></script>
 		<script type="text/javascript" src="/javascripts/homeView/contactBookController.js"></script>
@@ -19,8 +21,11 @@
 		
 
 	</head>
+	<form method = "get" action = "/signout">
+		<button type = "submit">Log Out</button>
+	</form>
 	<body >
-		<div ng-view ng-controller = "contactBookController as contactCtrl" class = "cf clearfix">
+		<div ng-view ng-controller = "contactBookController as contactCtrl" class = 'cf clearfix page' ng-class = "slide">
 			
 		</div>
 

@@ -1,12 +1,19 @@
+(function () {
 var User = require('./userModel'); 
 var UserContacts = require('./contactsModel'); 
 var bcrypt = require('bcrypt');
 
-exports.registerUser = function (req, res) {
+var trySignUp = {};
+
+trySignUp.checkForUser = function (req, res) {
  console.log('sign up user');
  console.log(req.body);
- 
  User.findOne({ 'username' :  req.body.newUser.username }, function(err, user) {
+  trySignUp.handleCheckForUserResponse(req, res, err, user);
+  });
+};
+
+trySignUp.handleCheckForUserResponse = function (req, res, err, user) {
     // In case of any error, return using the done method
     if (err){
         console.log('Error in SignUp: '+err);
@@ -18,44 +25,50 @@ exports.registerUser = function (req, res) {
         res.send("duplicate user")
      } 
      else {
-      createUser();
+      trySignUp.createHash(req, res);
      }
 
-  });
-  
+};
 
-  function createUser () {
+  trySignUp.createHash = function (req, res) {
    bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(req.body.newUser.password, salt, function(err, hash) {
+          trySignUp.createUser(req, res, err, hash);
+        });
+   });
+  };
+
+  trySignUp.createUser= function (req, res, err, hash) {
           if (err) throw err;
           console.log(hash);
           var newUser = new User({ username: req.body.newUser.username, password: hash});
           newUser.save(function (err, newUser) {
+            trySignUp.handleCreateUserResponse(req, res, err, newUser);
+          });
+  };
+
+  trySignUp.handleCreateUserResponse = function (req, res, err, newUser) {
           if (err) {
             console.log(err);
             res.send('could not add contact');
-            //Contact.disconnect();
           }
           else {
             console.log(newUser);
-
-
-            createUserDoc(newUser);
-           
-           // Contact.disconnect();
+            trySignUp.createUserDoc(req, res, err, newUser);
           }
-        
-        });
+  };
 
-     });
-   });
-  }
 
-  function createUserDoc (newUser) {
+  trySignUp.createUserDoc = function(req, res, err, newUser) {
     console.log(newUser);
     var userDoc = new UserContacts({ username: newUser.username, contacts: []});
     userDoc.save(function (err, userDoc) {
-          if (err) {
+      trySignUp.handleCreateUserDocResponse(req, res, err, newUser, userDoc);
+    });
+  };
+  
+  trySignUp.handleCreateUserDocResponse = function(req, res, err, newUser, userDoc) {
+      if (err) {
             console.log(err);
             res.send('error creating user doc');
             //Contact.disconnect();
@@ -67,9 +80,8 @@ exports.registerUser = function (req, res) {
            // Contact.disconnect();
           }
         
-        });
+       };
 
-  } 
-
-};
+  exports.trySignUp = trySignUp;
+})();
 

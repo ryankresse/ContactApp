@@ -28,8 +28,17 @@
 				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "loginCtrl.creds.password" required>
 				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" username = "loginCtrl.creds.username" password = "loginCtrl.creds.password" >Login</button>
 			</form>
+			<div ng-show = "loginCtrl.invalidInput">
+				Hmm, looks like you've entered an invalid email address or left something blank.
+			</div>
+			<div ng-show = "loginCtrl.wrongCredentials">
+				Whoops, it seems your email or password is incorrect.
+			</div>
+			<div ng-show = "loginCtrl.serverError">
+				Whoops. We're having trouble logging you in. Maybe reload the page and try again?
+			</div>
 		</div>
-
+		
 		<div ng-controller = "signUpController as signupCtrl" class = "cf clearfix">
 			<form id="" name = "signupform" class = "login-form" ng-submit = "signupCtrl.signUp(signupform.$valid)" novalidate>
 				<label for="email" class="pull-left">Email:</label>
@@ -38,6 +47,15 @@
 				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "signupCtrl.newUser.password" required>
 				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" valid = "signupform.$valid" username = "signupCtrl.newUser.username" password = "signupCtrl.newUser.password">Sign up</button>
 			</form>
+			<div ng-show = "signupCtrl.invalidInput">
+				Hmm, looks like you've entered an invalid email address or left something blank.
+			</div>
+			<div ng-show = "signupCtrl.duplicateUser">
+				Whoops, it seems like there's already user with that username. An evil twin, maybe?
+			</div>
+			<div ng-show = "signupCtrl.serverError">
+				Whoops. We're having trouble signing you in. Maybe reload the page and try again?
+			</div>
 		</div>
 
 	</body>

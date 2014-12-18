@@ -21,8 +21,8 @@ module.exports = function (config) {
         'public/javascripts/*.js',
         'public/javascripts/**/*.js',
         'public/javascripts/lib/*.js',
-        'test/angular-specs/*.js',
-        'test/angular-specs/**/*.js'
+        'angular-specs/*.js',
+        'angular-specs/**/*.js'
 
         ],
 

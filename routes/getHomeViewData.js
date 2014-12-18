@@ -10,19 +10,12 @@ exports.get = function (req, res) {
       if (err) {
         console.log(err);
         res.send('error loading contacts');
-        //contacts.disconnect();
-      
       }
       else {
         console.log('userDoc' , userDoc);
         res.send(userDoc.contacts);
-        //contacts.disconnect();
       }
     });
-
- 
-
-
 }
 
 

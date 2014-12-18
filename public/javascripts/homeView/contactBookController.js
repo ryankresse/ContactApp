@@ -2,12 +2,12 @@
 'use strict';
 angular
 	.module('app')
-	.controller('contactBookController', ['ContactsDataService', '$scope', '$location', '$timeout', contactBookController]);
+	.controller('contactBookController', ['ContactsDataService', '$scope', '$location', '$timeout', 'viewContactRedirectService', '$rootScope', contactBookController]);
 	
 	// a flag we'll use to know if our data has already been loaded from the server.
 	var loaded = false;
 
-	function contactBookController (ContactsDataService, $scope, $location, $timeout) {
+	function contactBookController (ContactsDataService, $scope, $location, $timeout, viewContactRedirectService, $rootScope) {
 		console.log('contact book controller');
 		
 		this.contacts = [];
@@ -15,11 +15,37 @@ angular
 		this.loadError = false;
 		this.orderItem = 'name';
 		this.loadError = false;
+		this.viewClass = '';
+	
+
 		var that = this;
 		
-		this.hideSuccessMessage = function (obj, msg) {
-		  that[obj][msg] = false;
-		}
+
+		
+			var path = $location.path();
+			console.log(path);
+			this.setViewClass = function () {
+			if (path == '/') {
+				that.viewClass = 'home-view';
+			}
+			else if (path == '/add-contact') {
+				that.viewClass = 'add-contact-view';
+			}
+			else {
+				that.viewClass = 'view-contact-view';
+			}
+			console.log(that.viewClass);
+	
+			};
+			this.setViewClass();
+
+		
+
+		this.hideMessage = function (obj, msg) {
+		  return $timeout(function ()  {
+		  	 that[obj][msg] = false;
+		  }, 2000);
+		};
 
 		
 	
@@ -78,7 +104,7 @@ angular
 		        console.log(that.contacts);
 		        $location.path('/');
 		        that.newContact.addSuccessful = true;
-		        $timeout(function ()  {that.hideSuccessMessage('newContact', 'addSuccessful')}, 2000);
+		        that.hideMessage('newContact', 'addSuccessful');
 		        
 		        that.newContact.info = {
 				  name: '',
@@ -138,12 +164,13 @@ angular
 			  	}
 			  }
 			that.viewContact.editSuccessful = true;
-		    $timeout(function ()  {that.hideSuccessMessage('viewContact', 'editSuccessful')}, 2000);
+		    that.hideMessage('viewContact', 'editSuccessful');
 			}
 			else {
 				// handling errors from the server.
 		  	  console.log('no data');
 			  that.viewContact.editUnsuccessful = true;
+			  that.hideMessage('viewContact', 'editUnsuccessful');
 			}
 
 		};
@@ -174,10 +201,11 @@ angular
 		    	$location.path('/');
 		    	that.viewContact.deleteSuccessful = true;
 		    	// need to reset the view contact object.
-		    	$timeout(function ()  {that.hideSuccessMessage('viewContact', 'deleteSuccessful')}, 2000);
+		    	that.hideMessage('viewContact', 'deleteSuccessful');
 		    }
 		  	else {
 		  	 that.viewContact.deleteError = true;
+		  	 that.hideMessage('viewContact', 'deleteError');
 		  	}
 		};
 
@@ -201,15 +229,9 @@ angular
 		    else {
 		      // populating our contacts array with the contacts retrieved from the DB.
 		      that.contacts = data;
-		    	var path = $location.path();
-		      // checking to see if the user has landed on the /view-contact view. If so, we redirect them to the home view--otherwise they wouldn't have selected a contact to view, and the /view-contact view would be empty 
-		  	  if (path === '/view-contact' && that.viewContact.contact === '') {
-		  	    $location.path('/');
-		  	    console.log('changing location');
-		  	  }
+		      viewContactRedirectService.check(that.viewContact.contact);
 		      // setting our loaded flag to true so that we don't try to load all the data again.	  
 		      loaded = true;
-
 		    }
 		};
 
@@ -219,17 +241,8 @@ angular
         if (loaded === false) {
 	      this.init();
         }
-	
+		//$rootScope.loaded += 1;
 	}
-
-
-
-			
-
-	
-
-
-
 
 })(); 
 

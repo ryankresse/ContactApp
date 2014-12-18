@@ -6,6 +6,10 @@ var UserContacts = require('./contactsModel');
 exports.save = function (req, res) {
   console.log('trying to save edits');
   console.log(req.body);
+  if (req.body.contact === '') {
+    res.send('error editing contact');
+    return;
+  }
 
   UserContacts.findOne({ 'username' :  req.session.username}, function(err, userDoc) {
   	if (err) {
@@ -18,9 +22,6 @@ exports.save = function (req, res) {
 
       for ( ; i < len; i++) {
         if (userDoc.contacts[i]._id == req.body.contact._id) {
-          console.log(userDoc.contacts[i]._id);
-          console.log(req.body.contact._id);
-          console.log('match');
           userDoc.contacts.set(i, req.body.contact);
           break;
         }

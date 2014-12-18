@@ -1,6 +1,6 @@
 exports.get = function (req, res) {
     var options = {
-    root:  "public" 
+      root:  "public" 
     }
    
    res.sendFile("html/home.html", options, function (err) {

@@ -6,6 +6,10 @@ var UserContacts = require('./contactsModel');
 exports.del = function (req, res) {
   console.log('trying to delete contact');
   console.log(req.body);
+  if (!req.body.id) {
+    res.send('error deleting contact');
+    return;
+  }
 
    UserContacts.findOne({ 'username' :  req.session.username}, function(err, userDoc) {
   	if (err) {

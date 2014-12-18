@@ -1,4 +1,4 @@
-
+<div class = "view-contact-view">
 	
 	Hello from the view contact view.
 	
@@ -22,6 +22,12 @@
 		<div ng-show = "contactCtrl.viewContact.editSuccessful">
 			Contact succesfully edited.
 		</div>
+		<div ng-show = "contactCtrl.viewContact.deleteError">
+			Sorry, we couldn't delete your contact.
+		</div>
+		<div ng-show = "contactCtrl.viewContact.editUnsuccessful">
+			Sorry, we couldn't save your edits.
+		</div>
 
 	</form>
-
+</div><!--view-contact-view-->
