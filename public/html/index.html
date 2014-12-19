@@ -16,47 +16,73 @@
 		<script type="text/javascript" src="/javascripts/login-create-account/loginSignupButtonDisable.Directive.js"></script>
 		<script type="text/javascript" src="/javascripts/login-create-account/signUp.service.js"></script>
 		<script type="text/javascript" src="/javascripts/login-create-account/signUpController.js"></script>
-		
-
 	</head>
-	<body >
-		<div ng-controller = "loginController as loginCtrl" class = "cf clearfix">
-			<form id="" name = "loginform" class = "login-form" ng-submit = "loginCtrl.attemptLogin(loginform.$valid)" novalidate>
-				<label for="email" class="pull-left">Email:</label>
-				<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "loginCtrl.creds.username" required>
-				<label for="password" class="pull-left">Password:</label>
-				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "loginCtrl.creds.password" required>
-				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" username = "loginCtrl.creds.username" password = "loginCtrl.creds.password" >Login</button>
+
+	<body class = "index-body col-xs-12 col-sm-6 col-md-6 col-sm-offset-3" >
+		<div class= "intro">
+			<h1 class = "app-name">
+				Easy Contact
+			</h1>
+			<p class = "lead">
+				A demo address book built with Angular, Node and Mongoose.
+			</p>
+		</div>
+
+		
+		<div ng-controller = "signUpController as signupCtrl" class = "cf index-section">
+			<h4>
+				Sign up
+			</h4>
+			<form id="" name = "signupform" class = "login-form cf" ng-submit = "signupCtrl.signUp(signupform.$valid)" novalidate>
+				<div class = "form-group">
+					<label for="email" class="pull-left">Email:</label>
+					<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "signupCtrl.newUser.username" required>
+				</div>
+				<div class = "form-group">
+					<label for="password" class="pull-left">Password:</label>
+					<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "signupCtrl.newUser.password" required>
+				</div>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" valid = "signupform.$valid" username = "signupCtrl.newUser.username" password = "signupCtrl.newUser.password">Sign up</button>
 			</form>
-			<div ng-show = "loginCtrl.invalidInput">
+			<div class = "index-error" ng-show = "signupCtrl.invalidInput">
 				Hmm, looks like you've entered an invalid email address or left something blank.
 			</div>
-			<div ng-show = "loginCtrl.wrongCredentials">
+			<div class = "index-error"  ng-show = "signupCtrl.duplicateUser">
+				Whoops, it seems like there's already user with that username. An evil twin, maybe?
+			</div>
+			<div class = "index-error"  ng-show = "signupCtrl.serverError">
+				Whoops. We're having trouble signing you in. Maybe reload the page and try again?
+			</div>
+		</div>
+
+
+		<div ng-controller = "loginController as loginCtrl" class = "cf  index-section">
+			<h4>
+				Log in
+			</h4>
+			<form id="" name = "loginform" class = "login-form cf" ng-submit = "loginCtrl.attemptLogin(loginform.$valid)" novalidate>
+				<div class = "form-group">
+					<label for="email" class="pull-left">Email:</label>
+					<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "loginCtrl.creds.username" required>
+				</div>
+				<div class = "form-group">
+					<label for="password" class="pull-left">Password:</label>
+					<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "loginCtrl.creds.password" required>
+				</div>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" username = "loginCtrl.creds.username" password = "loginCtrl.creds.password" >Login</button>
+			</form>
+			<div class = "index-error"  ng-show = "loginCtrl.invalidInput">
+				Hmm, looks like you've entered an invalid email address or left something blank.
+			</div>
+			<div class = "index-error"  ng-show = "loginCtrl.wrongCredentials">
 				Whoops, it seems your email or password is incorrect.
 			</div>
-			<div ng-show = "loginCtrl.serverError">
+			<div class = "index-error"  ng-show = "loginCtrl.serverError">
 				Whoops. We're having trouble logging you in. Maybe reload the page and try again?
 			</div>
 		</div>
 		
-		<div ng-controller = "signUpController as signupCtrl" class = "cf clearfix">
-			<form id="" name = "signupform" class = "login-form" ng-submit = "signupCtrl.signUp(signupform.$valid)" novalidate>
-				<label for="email" class="pull-left">Email:</label>
-				<input type="email" class = "form-control"  placeholder = "Email" name="email" ng-model = "signupCtrl.newUser.username" required>
-				<label for="password" class="pull-left">Password:</label>
-				<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "signupCtrl.newUser.password" required>
-				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" valid = "signupform.$valid" username = "signupCtrl.newUser.username" password = "signupCtrl.newUser.password">Sign up</button>
-			</form>
-			<div ng-show = "signupCtrl.invalidInput">
-				Hmm, looks like you've entered an invalid email address or left something blank.
-			</div>
-			<div ng-show = "signupCtrl.duplicateUser">
-				Whoops, it seems like there's already user with that username. An evil twin, maybe?
-			</div>
-			<div ng-show = "signupCtrl.serverError">
-				Whoops. We're having trouble signing you in. Maybe reload the page and try again?
-			</div>
-		</div>
+	
 
 	</body>
 </html>

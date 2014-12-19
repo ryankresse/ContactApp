@@ -1,27 +1,47 @@
 <div class = "home-view">
-	
-	Hello from the home view.
-	<button ng-click = "contactCtrl.setCategory('Family')">
-		Family
-	</button>
-	<button ng-click = "contactCtrl.setCategory('Work')">
-		Work
-	</button>
+	<div class = "row top-bar cf">
+		<div class = "add-contact col-xs-6 cf">
+			<div class = "top-bar-text cf">
+				<a href = "#/add-contact">Add contact</a>
+			</div>
+		</div>
+		<div class = "logout col-xs-6 cf">
+			<div class = "top-bar-text cf">
+				<a href = "/signout">Log out</a>
+			</div>
+		</div>
+	</div>
+	<div class = "contacts cf">	
 		<ul>
-			<li  ng-repeat = "contact in filteredContacts = (contactCtrl.contacts | categoryFilter:contactCtrl.category | orderBy:contactCtrl.orderItem)" ng-click = "contactCtrl.viewContact.init(contact)">
+			<li  ng-repeat = "contact in filteredContacts = (contactCtrl.contacts | categoryFilter:contactCtrl.category | orderBy:contactCtrl.orderItem)" ng-click = "contactCtrl.viewContact.init(contact)" class = 'repeat-animation contact'>
 				{{contact.name}}
 			</li>
 		</ul>
-	
+	</div>
 		<div ng-show = "!filteredContacts.length">
 			No contacts! Add some!
 		</div>
-	<a href = "#/add-contact">Add contact</a>
-
+	
 	<div ng-show = "contactCtrl.newContact.addSuccessful">
 		Contact succesfully added.
 	</div>
 	<div ng-show = "contactCtrl.viewContact.deleteSuccessful">
 		Contact succesfully deleted.
 	</div>
+
+	<div class = "row category-bar cf">
+		<div class = "col-xs-3 category" ng-click = "contactCtrl.setCategory('Family')">
+			<div class = "category-text">Family</div>
+		</div>
+		<div class = "col-xs-3 category" ng-click = "contactCtrl.setCategory('Work')">
+			<div class = "category-text">Work</div>
+		</div>
+		<div class = "col-xs-3 category" ng-click = "contactCtrl.setCategory('Friends')">
+			<div class = "category-text">Friends</div>
+		</div>
+		<div class = "col-xs-3 category" ng-click = "contactCtrl.setCategory('Other')">
+			<div class = "category-text">Other</div>
+		</div>
+	</div>
+
 </div><!--home-view-->

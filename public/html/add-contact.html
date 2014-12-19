@@ -1,20 +1,58 @@
 
-	
-	Hello from add a contact view.
-	
+<div class = "add-contact-container col-xs-12 col-sm-6 col-sm-offset-3">
+	<h2> 
+		Add your contact
+	</h2>
 	<form>
-		<input type = "text" ng-model = "contactCtrl.newContact.info.name" placeholder = "Name">
-		<input type = "text" ng-model = "contactCtrl.newContact.info.email" placeholder = "Email">
-		<input type = "text" ng-model = "contactCtrl.newContact.info.address" placeholder = "Address">
-		<input type = "text" ng-model = "contactCtrl.newContact.info.phone" placeholder = "Phone Number">
-		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Family"> Family 
-  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Friends"> Friends
-  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Work"> Work 
-  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Other"> Other 
-	
-  		<button type = "submit" ng-click = "contactCtrl.newContact.addContact(contactCtrl.newContact.info)" enabledisable name = "contactCtrl.newContact.info.name">
-			Add contact.
-		</button>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Name
+			</label>
+			<input type = "text" ng-model = "contactCtrl.newContact.info.name" class = "form-control" placeholder = "Name">
+		</div>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Email
+			</label>
+			<input type = "text" ng-model = "contactCtrl.newContact.info.email" class = "form-control" placeholder = "Email">
+		</div>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Address
+			</label>
+			<input type = "text" ng-model = "contactCtrl.newContact.info.address" class = "form-control" placeholder = "Address">
+		</div>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Phone
+			</label>
+			<input type = "text" ng-model = "contactCtrl.newContact.info.phone" class = "form-control" placeholder = "Phone Number">
+		</div>
+			<label class= "radio-inline">
+				<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Family"> 
+					Family 
+  			</label>
+  		<label class= "radio-inline">
+  			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Friends"> 
+  			Friends
+  		</label>
+  		<label class= "radio-inline">
+  			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Work"> 
+  			Work 
+  		</label>
+  		<label class= "radio-inline">
+  			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.newContact.info.category" value="Other"> 
+  			Other 
+		</label>
+  		<div class = "add-button-container">
+	  		<button type = "submit" class = "btn btn-primary add-contact-btn" ng-click = "contactCtrl.newContact.addContact(contactCtrl.newContact.info)" enabledisable name = "contactCtrl.newContact.info.name">
+				Add contact.
+			</button>
+		</div>
 
 	</form>
 
+	<a href = "#/"> 
+		Back
+	</a>
+</div>

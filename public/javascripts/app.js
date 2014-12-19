@@ -23,7 +23,7 @@ angular.module('app', ['ngRoute', 'ngTouch', 'ngTouch','ngAnimate'])
         $rootScope.slide = '';  
         $rootScope.loaded = 0;
 
-        $rootScope.$on('$routeChangeStart', function() {  
+        $rootScope.$on('$routeChangeSuccess', function() {  
             //event button to move backward  
              var path = $location.path();
              if ($rootScope.loaded > 0) {
@@ -31,10 +31,13 @@ angular.module('app', ['ngRoute', 'ngTouch', 'ngTouch','ngAnimate'])
              if (path === "/") {
             $rootScope.slide = 'fromLeft'; 
           }
-          else {
+          else if (path === "/add-contact"){
             $rootScope.slide = 'fromRight'; 
           }
+          else if (path === "/view-contact") {
+          $rootScope.slide = 'fromRight'; 
         }
+      }
         $rootScope.loaded += 1;
          console.log($rootScope.loaded);
             /*$rootScope.back = function() {  

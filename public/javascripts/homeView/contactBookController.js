@@ -15,6 +15,7 @@ angular
 		this.loadError = false;
 		this.orderItem = 'name';
 		this.loadError = false;
+		
 		this.viewClass = '';
 	
 
@@ -129,6 +130,7 @@ angular
 		this.viewContact.editUnsuccessful = false;
 		this.viewContact.deleteSuccessful = false;
 		this.viewContact.deleteError = false;
+		this.viewContact.deleteConfirm = false;
 
 		// when the user clicks a contact from the home view, we need to populate the viewContact view with that contact's information.
 		this.viewContact.init = function (contact) {
@@ -177,7 +179,14 @@ angular
 
 		
 
-		
+		this.viewContact.showDeleteConfirm = function() {
+			that.viewContact.deleteConfirm = true;
+		};
+
+
+		this.viewContact.hideDeleteConfirm = function() {
+			that.viewContact.deleteConfirm = false;
+		};
 		
 		this.viewContact.deleteContact = function () {
 		  
@@ -200,6 +209,7 @@ angular
 
 		    	$location.path('/');
 		    	that.viewContact.deleteSuccessful = true;
+		    	that.viewContact.deleteConfirm = false;
 		    	// need to reset the view contact object.
 		    	that.hideMessage('viewContact', 'deleteSuccessful');
 		    }
@@ -235,11 +245,18 @@ angular
 		    }
 		};
 
-
-        
+		this.setSlide = function () {
+			 if (path === "/") {
+            $rootScope.slide = 'fromLeft'; 
+          }
+          else {
+            $rootScope.slide = 'fromRight'; 
+          }
+		};
         // we initialize the app by loading data from the server if it hasn't been loaded already.
         if (loaded === false) {
 	      this.init();
+	      //this.setSlide();
         }
 		//$rootScope.loaded += 1;
 	}

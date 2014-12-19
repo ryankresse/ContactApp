@@ -17,6 +17,10 @@ var mongoose = require('mongoose');
     contacts: [contactSchema]
 });
 
+
+userContactsSchema.index({username: 1});
+userContactsSchema.set('autoIndex', false);
+
 var userContactsModel = mongoose.model('userContactsModel', userContactsSchema);
 
 module.exports = userContactsModel;

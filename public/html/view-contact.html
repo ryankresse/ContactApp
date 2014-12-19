@@ -1,24 +1,56 @@
-<div class = "view-contact-view">
-	
-	Hello from the view contact view.
-	
+<div class = "view-contact-container col-xs-12 col-sm-6 col-sm-offset-3">
+	<h2> 
+		{{contactCtrl.viewContact.contact.name}}
+	</h2>
 	<form>
-		<input type = "text" ng-model = "contactCtrl.viewContact.contact.name" placeholder = "Contact Name">
-		<input type = "text" ng-model = "contactCtrl.viewContact.contact.email" placeholder = "No email provided">
-		<input type = "text" ng-model = "contactCtrl.viewContact.contact.address" placeholder = "No address provided">
-		<input type = "text" ng-model = "contactCtrl.viewContact.contact.phone" placeholder = "No phone number provided">
-
-		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Family"> Family 
-  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Friends"> Friends
-  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Work"> Work 
-  		<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Other"> Other 
-	
-  		<button type = "submit" ng-click = "contactCtrl.viewContact.saveEdits()" enabledisable name = "contactCtrl.viewContact.contact.name">
-			Save edits
-		</button>
-		<button type = "submit" ng-click = "contactCtrl.viewContact.deleteContact()">
-			Delete Contact
-		</button>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Name
+			</label>
+			<input type = "text" class = "form-control" ng-model = "contactCtrl.viewContact.contact.name" placeholder = "Contact Name">
+		</div>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Email
+			</label>
+			<input type = "text" class = "form-control" ng-model = "contactCtrl.viewContact.contact.email" placeholder = "No email provided">	
+		</div>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Address
+			</label>
+			<input type = "text" class = "form-control" ng-model = "contactCtrl.viewContact.contact.address" placeholder = "No address provided">
+		</div>
+		<div class = "form-group">
+			<label class = "add-contact-label">
+				Phone
+			</label>
+				<input type = "text" class = "form-control" ng-model = "contactCtrl.viewContact.contact.phone" placeholder = "No phone number provided">
+		</div>
+		<label class= "radio-inline">
+			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Family"> 
+  			Family 
+  		</label>
+  		<label class= "radio-inline">
+  			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Friends"> 
+  			Friends
+  		</label>
+  		<label class= "radio-inline">	
+  			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Work"> 
+  			Work 
+  		</label>
+  		<label class= "radio-inline">
+  			<input type="radio" name = "categoryRadio" ng-model="contactCtrl.viewContact.contact.category" value="Other">  
+			Other 
+		</label>
+  		<div class = "view-contacts-btns">
+	  		<button type = "submit" class = "btn btn-primary" ng-click = "contactCtrl.viewContact.saveEdits()" enabledisable name = "contactCtrl.viewContact.contact.name">
+				Save edits
+			</button>
+			<button type = "submit" class = "btn btn-primary" ng-click = "contactCtrl.viewContact.showDeleteConfirm()">
+				Delete Contact
+			</button>
+		</div>
 		<div ng-show = "contactCtrl.viewContact.editSuccessful">
 			Contact succesfully edited.
 		</div>
@@ -30,4 +62,15 @@
 		</div>
 
 	</form>
-</div><!--view-contact-view-->
+	<div class = "delete-confirm" ng-show = "contactCtrl.viewContact.deleteConfirm">
+		<h4> 
+			You sure about this?
+		</h4>
+		<button type = "submit" class = "btn btn-primary" ng-click = "contactCtrl.viewContact.deleteContact()">
+			Yep.
+		</button>
+		<button type = "submit" class = "btn btn-primary" ng-click = "contactCtrl.viewContact.hideDeleteConfirm()">
+			Nope.
+		</button>
+	</div>
+</div><!--view-contact-container-->

@@ -6,7 +6,12 @@ var mongoose = require('mongoose');
       password: String
     });
 
+
+userSchema.index({username: 1});
+userSchema.set('autoIndex', false);
+
 var userModel = mongoose.model('userModel', userSchema);
+
 
 module.exports = userModel;
 

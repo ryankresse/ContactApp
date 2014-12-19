@@ -1,0 +1,65 @@
+.log-out {
+	height: 60px;
+	padding: 10px;
+	background: #ededed;
+}
+
+.home-view {
+	padding-top: 60px;
+}
+.category-bar {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	margin: 0;
+
+}
+.category {
+	text-align: center;
+	background: #ededed;
+	height: 50px;
+	postion: relative;
+}
+.category-text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.logout,
+.add-contact {
+	position: relative;
+	height: 30px;
+}
+.top-bar {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	margin: 0;
+	text-align: center;
+	background: #ededed;
+	z-index: 1;
+	height: 30px;
+}
+.top-bar-text {
+	position: absolute;
+	transform: translate( -50%, -50%);
+	top: 50%;
+	left: 50%;
+	margin: 0px auto;
+}
+
+.contact {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	border-bottom: 1px solid #ededed;
+}
+.contact:hover {
+	background: #ccc;
+}
+
+.contacts {
+	height: 100%;
+	z-index: 0;
+}
