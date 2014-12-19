@@ -1,4 +1,4 @@
-<div class = "view-contact-container col-xs-12 col-sm-6 col-sm-offset-3">
+<div class = "view-contact-container col-xs-12 col-sm-6 col-sm-offset-3" ng-class = "{faded: contactCtrl.viewContact.deleteConfirm == true}" >
 	<h2> 
 		{{contactCtrl.viewContact.contact.name}}
 	</h2>
@@ -51,7 +51,7 @@
 				Delete Contact
 			</button>
 		</div>
-		<div ng-show = "contactCtrl.viewContact.editSuccessful">
+		<div ng-show = "contactCtrl.viewContact.editSuccessful" class = "edit-successful help-block">
 			Contact succesfully edited.
 		</div>
 		<div ng-show = "contactCtrl.viewContact.deleteError">
@@ -62,7 +62,9 @@
 		</div>
 
 	</form>
-	<div class = "delete-confirm" ng-show = "contactCtrl.viewContact.deleteConfirm">
+	
+</div><!--view-contact-container-->
+<div class = "delete-confirm" ng-show = "contactCtrl.viewContact.deleteConfirm">
 		<h4> 
 			You sure about this?
 		</h4>
@@ -73,4 +75,3 @@
 			Nope.
 		</button>
 	</div>
-</div><!--view-contact-container-->

@@ -42,10 +42,10 @@ angular
 
 		
 
-		this.hideMessage = function (obj, msg) {
+		this.hideMessage = function (obj, msg, interval) {
 		  return $timeout(function ()  {
 		  	 that[obj][msg] = false;
-		  }, 2000);
+		  }, interval);
 		};
 
 		
@@ -105,7 +105,7 @@ angular
 		        console.log(that.contacts);
 		        $location.path('/');
 		        that.newContact.addSuccessful = true;
-		        that.hideMessage('newContact', 'addSuccessful');
+		        that.hideMessage('newContact', 'addSuccessful', 1000);
 		        
 		        that.newContact.info = {
 				  name: '',
@@ -166,13 +166,13 @@ angular
 			  	}
 			  }
 			that.viewContact.editSuccessful = true;
-		    that.hideMessage('viewContact', 'editSuccessful');
+		    that.hideMessage('viewContact', 'editSuccessful', 2000);
 			}
 			else {
 				// handling errors from the server.
 		  	  console.log('no data');
 			  that.viewContact.editUnsuccessful = true;
-			  that.hideMessage('viewContact', 'editUnsuccessful');
+			  that.hideMessage('viewContact', 'editUnsuccessful', 2000);
 			}
 
 		};
@@ -211,11 +211,11 @@ angular
 		    	that.viewContact.deleteSuccessful = true;
 		    	that.viewContact.deleteConfirm = false;
 		    	// need to reset the view contact object.
-		    	that.hideMessage('viewContact', 'deleteSuccessful');
+		    	that.hideMessage('viewContact', 'deleteSuccessful', 1000);
 		    }
 		  	else {
 		  	 that.viewContact.deleteError = true;
-		  	 that.hideMessage('viewContact', 'deleteError');
+		  	 that.hideMessage('viewContact', 'deleteError', 2000);
 		  	}
 		};
 

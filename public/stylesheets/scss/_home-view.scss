@@ -3,9 +3,8 @@
 	padding: 10px;
 	background: #ededed;
 }
-
 .home-view {
-	padding-top: 60px;
+	padding-top: 30px;
 }
 .category-bar {
 	position: fixed;
@@ -19,6 +18,14 @@
 	background: #ededed;
 	height: 50px;
 	postion: relative;
+	border-right: 1px solid #ccc;	
+}
+.category:hover {
+	background: #ccc;
+}
+.selectedcategory {
+	background: #337ab7;
+	color: #ededed;
 }
 .category-text {
 	position: absolute;
@@ -62,4 +69,14 @@
 .contacts {
 	height: 100%;
 	z-index: 0;
+}
+.add-successful-message,
+.delete-successful-message {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #ededed;
+	z-index: 1;
+	padding: 50px;
 }

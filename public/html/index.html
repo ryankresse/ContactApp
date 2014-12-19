@@ -42,7 +42,7 @@
 					<label for="password" class="pull-left">Password:</label>
 					<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "signupCtrl.newUser.password" required>
 				</div>
-				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" valid = "signupform.$valid" username = "signupCtrl.newUser.username" password = "signupCtrl.newUser.password">Sign up</button>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" valid = "signupform.$valid" username = "signupCtrl.newUser.username" ng-disabled="signupform.$invalid" password = "signupCtrl.newUser.password">Sign up</button>
 			</form>
 			<div class = "index-error" ng-show = "signupCtrl.invalidInput">
 				Hmm, looks like you've entered an invalid email address or left something blank.
@@ -69,7 +69,7 @@
 					<label for="password" class="pull-left">Password:</label>
 					<input type="password" class = "form-control" placeholder = "Password" name="password" ng-model = "loginCtrl.creds.password" required>
 				</div>
-				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" username = "loginCtrl.creds.username" password = "loginCtrl.creds.password" >Login</button>
+				<button class = "btn btn-primary col-xs-12"  type="submit" id="login-button" username = "loginCtrl.creds.username" password = "loginCtrl.creds.password" ng-disabled="loginform.$invalid" >Login</button>
 			</form>
 			<div class = "index-error"  ng-show = "loginCtrl.invalidInput">
 				Hmm, looks like you've entered an invalid email address or left something blank.

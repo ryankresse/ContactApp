@@ -8365,12 +8365,12 @@ button.close {
   background: #ededed;
 }
 
-/* line 7, scss/_home-view.scss */
+/* line 6, scss/_home-view.scss */
 .home-view {
-  padding-top: 60px;
+  padding-top: 30px;
 }
 
-/* line 10, scss/_home-view.scss */
+/* line 9, scss/_home-view.scss */
 .category-bar {
   position: fixed;
   bottom: 0;
@@ -8378,15 +8378,27 @@ button.close {
   margin: 0;
 }
 
-/* line 17, scss/_home-view.scss */
+/* line 16, scss/_home-view.scss */
 .category {
   text-align: center;
   background: #ededed;
   height: 50px;
   postion: relative;
+  border-right: 1px solid #ccc;
 }
 
 /* line 23, scss/_home-view.scss */
+.category:hover {
+  background: #ccc;
+}
+
+/* line 26, scss/_home-view.scss */
+.selectedcategory {
+  background: #337ab7;
+  color: #ededed;
+}
+
+/* line 30, scss/_home-view.scss */
 .category-text {
   position: absolute;
   top: 50%;
@@ -8394,14 +8406,14 @@ button.close {
   transform: translate(-50%, -50%);
 }
 
-/* line 30, scss/_home-view.scss */
+/* line 37, scss/_home-view.scss */
 .logout,
 .add-contact {
   position: relative;
   height: 30px;
 }
 
-/* line 34, scss/_home-view.scss */
+/* line 41, scss/_home-view.scss */
 .top-bar {
   width: 100%;
   position: fixed;
@@ -8413,7 +8425,7 @@ button.close {
   height: 30px;
 }
 
-/* line 44, scss/_home-view.scss */
+/* line 51, scss/_home-view.scss */
 .top-bar-text {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -8422,7 +8434,7 @@ button.close {
   margin: 0px auto;
 }
 
-/* line 52, scss/_home-view.scss */
+/* line 59, scss/_home-view.scss */
 .contact {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -8430,15 +8442,27 @@ button.close {
   border-bottom: 1px solid #ededed;
 }
 
-/* line 58, scss/_home-view.scss */
+/* line 65, scss/_home-view.scss */
 .contact:hover {
   background: #ccc;
 }
 
-/* line 62, scss/_home-view.scss */
+/* line 69, scss/_home-view.scss */
 .contacts {
   height: 100%;
   z-index: 0;
+}
+
+/* line 74, scss/_home-view.scss */
+.add-successful-message,
+.delete-successful-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ededed;
+  z-index: 1;
+  padding: 50px;
 }
 
 /* line 1, scss/_add-contact.scss */
@@ -8451,4 +8475,25 @@ button.close {
 .view-contacts-btns {
   clear: both;
   margin-top: 20px;
+}
+
+/* line 5, scss/_view-contact.scss */
+.delete-confirm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ededed;
+  z-index: 1;
+  padding: 50px;
+}
+
+/* line 14, scss/_view-contact.scss */
+.faded {
+  opacity: .5;
+}
+
+/* line 17, scss/_view-contact.scss */
+.view-contact-container {
+  position: relative;
 }
