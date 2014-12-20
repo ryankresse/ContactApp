@@ -11,7 +11,7 @@ var passport = require('passport');
 var expressSession = require('express-session');
 var flash = require('connect-flash');
 var routes = require('./routes/index')(passport);
-var initPassport = require('./passport/init');
+
 // connection to db
 mongoose.connect('mongodb://localhost/mydb');
 
