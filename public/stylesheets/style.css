@@ -8320,6 +8320,7 @@ button.close {
   left: 100%;
 }
 
+/*-------------REPEAT ANIMATIONS--------------*/
 /* line 1, scss/_index.scss */
 .index-body {
   text-align: center;
@@ -8468,6 +8469,11 @@ button.close {
 /* line 1, scss/_add-contact.scss */
 .add-button-container {
   clear: both;
+  margin-top: 20px;
+}
+
+/* line 5, scss/_add-contact.scss */
+.add-contact-back {
   margin-top: 20px;
 }
 
