@@ -9,7 +9,7 @@ var users = require('./routes/users');
 var app = express();
 var passport = require('passport');
 var expressSession = require('express-session');
-var flash = require('connect-flash');
+
 var routes = require('./routes/index')(passport);
 
 // connection to db
@@ -35,13 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.cookieParser('your secret here'));
 
 app.use(expressSession({secret: 'mySecretKey'}));
-app.use(passport.initialize());
-app.use(passport.session());
 
 
-app.use(flash());
 
-initPassport(passport)
 
 app.use('/', routes);
 app.use('/users', users);
